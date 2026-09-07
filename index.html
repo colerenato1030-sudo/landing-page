@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AceTennis — Building Champions On and Off the Court</title>
+<meta name="description" content="AceTennis is a year-round academy for players who want to train smarter, play stronger and compete further. Coaching, programs and tournaments for every level.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<!-- ============================ HERO ============================ -->
+<header class="hero" id="top">
+
+  <!-- layer 1 — sky -->
+  <div class="hero__sky" aria-hidden="true">
+    <svg class="hero__clouds" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" role="presentation">
+      <defs>
+        <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur stdDeviation="26"/>
+        </filter>
+        <filter id="softer" x="-30%" y="-30%" width="160%" height="160%">
+          <feGaussianBlur stdDeviation="48"/>
+        </filter>
+      </defs>
+      <g fill="#ffffff" filter="url(#softer)" opacity=".55">
+        <ellipse cx="230" cy="700" rx="360" ry="150"/>
+        <ellipse cx="1380" cy="760" rx="420" ry="170"/>
+        <ellipse cx="820" cy="840" rx="520" ry="180"/>
+      </g>
+      <g fill="#ffffff" filter="url(#soft)" opacity=".7">
+        <ellipse cx="330" cy="180" rx="210" ry="72"/>
+        <ellipse cx="470" cy="150" rx="150" ry="58"/>
+        <ellipse cx="1240" cy="240" rx="240" ry="80"/>
+        <ellipse cx="1080" cy="215" rx="140" ry="54"/>
+        <ellipse cx="760" cy="620" rx="300" ry="96"/>
+      </g>
+    </svg>
+  </div>
+
+  <!-- layer 2 — navigation -->
+  <nav class="nav" aria-label="Primary">
+    <a class="nav__brand" href="#top">
+      <span class="nav__mark" aria-hidden="true">
+        <svg viewBox="0 0 32 32"><path d="M16 3 6 29h5.1l2-5.6h9.2l2 5.6H29L19 3h-3Zm-1.2 15.6L17.5 11l2.7 7.6h-5.4Z"/><circle cx="26" cy="7" r="3"/></svg>
+      </span>
+      <span class="nav__word">Ace<em>Tennis</em></span>
+    </a>
+
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-menu">
+      <span class="nav__bars" aria-hidden="true"></span>
+      <span class="sr-only">Menu</span>
+    </button>
+
+    <ul class="nav__menu" id="nav-menu">
+      <li><a href="#top" aria-current="page">Home</a></li>
+      <li><a href="#training">Training</a></li>
+      <li><a href="#programs">Programs</a></li>
+      <li><a href="#coaches">Coaches</a></li>
+      <li><a href="#tournaments">Tournaments</a></li>
+      <li><a href="#membership">Membership</a></li>
+    </ul>
+
+    <a class="btn btn--light nav__cta" href="#membership">
+      Book a Lesson
+      <span class="btn__icon" aria-hidden="true">
+        <svg viewBox="0 0 16 16"><path d="M3 8h9M8.5 4l4 4-4 4"/></svg>
+      </span>
+    </a>
+  </nav>
+
+  <!-- layer 3 — the stage: type sits BEHIND, the players sit IN FRONT -->
+  <div class="stage">
+
+    <h1 class="stage__type" data-headline>
+      <span class="stage__line">Play Strong<span class="stage__dot">.</span></span>
+    </h1>
+
+    <!-- Swap src for the transparent-background cut-out when it lands. -->
+    <img class="stage__subject"
+         src="assets/hero-players.svg"
+         alt="Two AceTennis players standing back to back on court, one holding a racket and one holding a paddle"
+         width="800" height="1170" fetchpriority="high" decoding="async">
+
+    <div class="stage__caption">
+      <p class="stage__eyebrow">— Since 1998</p>
+      <p class="stage__lede" data-lede>Building Champions On and&nbsp;Off the Court</p>
+      <div class="stage__controls">
+        <button class="round" type="button" data-slide="prev"><span class="sr-only">Previous slide</span>
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M13 8H4M7.5 3.5 3 8l4.5 4.5"/></svg>
+        </button>
+        <button class="round" type="button" data-slide="next"><span class="sr-only">Next slide</span>
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 3.5 13 8l-4.5 4.5"/></svg>
+        </button>
+        <span class="stage__count"><b data-current>1</b> / <span data-total>3</span></span>
+      </div>
+    </div>
+
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ============================ TICKER ============================ -->
+<section class="ticker" aria-label="At a glance">
+  <div class="ticker__track">
+    <span>12 Championship Courts</span><i>◆</i>
+    <span>Video Analysis on Every Court</span><i>◆</i>
+    <span>USPTA Certified Coaches</span><i>◆</i>
+    <span>Junior to Pro Pathways</span><i>◆</i>
+    <span>12 Championship Courts</span><i>◆</i>
+    <span>Video Analysis on Every Court</span><i>◆</i>
+    <span>USPTA Certified Coaches</span><i>◆</i>
+    <span>Junior to Pro Pathways</span><i>◆</i>
+  </div>
+</section>
+
+<!-- ============================ TRAINING ============================ -->
+<section class="section" id="training">
+  <div class="wrap split">
+    <div>
+      <p class="eyebrow"><span class="dot" aria-hidden="true"></span> How it works</p>
+      <h2 class="h2">Train smarter.<br>Improve faster.</h2>
+    </div>
+    <div class="split__body">
+      <p>Every session is filmed, tagged and reviewed. You leave the court knowing exactly what changed, what to drill next week, and how it moves your ranking — not just how tired you are.</p>
+      <div class="stats">
+        <div class="stat"><b>4,200+</b><span>Players coached</span></div>
+        <div class="stat"><b>27</b><span>National titles</span></div>
+        <div class="stat"><b>98%</b><span>Renew each season</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ PROGRAMS ============================ -->
+<section class="section section--tight" id="programs">
+  <div class="wrap">
+    <div class="section__head">
+      <h2 class="h2">Programs</h2>
+      <a class="link" href="#membership">See all pricing
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4"/></svg>
+      </a>
+    </div>
+
+    <ul class="cards">
+      <li class="card">
+        <span class="card__num">01</span>
+        <h3>Junior Academy</h3>
+        <p>Ages 6–17. Four levels from first-swing red ball through national tournament prep, with strength and movement built in.</p>
+        <span class="card__meta">3–5 sessions / week</span>
+      </li>
+      <li class="card">
+        <span class="card__num">02</span>
+        <h3>Adult Clinics</h3>
+        <p>Small-group coaching at 2.5 through 5.0 NTRP. Drill blocks, live points, and a match every Friday night under lights.</p>
+        <span class="card__meta">Drop-in or 10-pack</span>
+      </li>
+      <li class="card">
+        <span class="card__num">03</span>
+        <h3>Private Coaching</h3>
+        <p>One-on-one with a head coach. Serve rebuilds, tactical patterning and pre-tournament tune-ups, filmed end to end.</p>
+        <span class="card__meta">60 or 90 minutes</span>
+      </li>
+      <li class="card">
+        <span class="card__num">04</span>
+        <h3>Performance Lab</h3>
+        <p>Racket speed, spin rate and split-step timing measured on court, then turned into a six-week block you can actually follow.</p>
+        <span class="card__meta">By assessment</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============================ COACHES ============================ -->
+<section class="section section--tight" id="coaches">
+  <div class="wrap">
+    <div class="section__head">
+      <h2 class="h2">The bench</h2>
+      <p class="section__note">Nine full-time coaches. No rotating staff, no filler sessions.</p>
+    </div>
+    <ul class="coaches">
+      <li><b>Mara Oyelaran</b><span>Director of Performance</span></li>
+      <li><b>Tomas Ruiz</b><span>Head Coach, Juniors</span></li>
+      <li><b>Ji-woo Han</b><span>Serve &amp; Return Specialist</span></li>
+      <li><b>Dana Whitfield</b><span>Strength &amp; Movement</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============================ CTA ============================ -->
+<section class="cta" id="membership">
+  <div class="wrap cta__inner">
+    <h2 class="cta__type">Your court<br>is waiting<span class="stage__dot">.</span></h2>
+    <div class="cta__side">
+      <p>Book a free 45-minute assessment. We film it, grade it, and hand you a plan — whether or not you join.</p>
+      <div class="cta__row">
+        <a class="btn btn--accent" href="#membership">Book a Lesson
+          <span class="btn__icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 8h9M8.5 4l4 4-4 4"/></svg></span>
+        </a>
+        <a class="btn btn--ghost" href="#tournaments">Tournament calendar</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot" id="tournaments">
+  <div class="wrap foot__inner">
+    <p class="foot__brand">Ace<em>Tennis</em></p>
+    <nav class="foot__links" aria-label="Footer">
+      <a href="#training">Training</a>
+      <a href="#programs">Programs</a>
+      <a href="#coaches">Coaches</a>
+      <a href="#membership">Membership</a>
+    </nav>
+    <p class="foot__legal">© 1998–2026 AceTennis Club. All rights reserved.</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
