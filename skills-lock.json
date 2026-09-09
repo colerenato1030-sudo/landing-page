@@ -1,6 +1,12 @@
 {
   "version": 1,
   "skills": {
+    "ai-graphic-design": {
+      "source": "designrique/ai-graphic-design-skill",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "34e2d6a69780447f7c3c22262f05e78134245c7eebcd7541315156e802e6d818"
+    },
     "graphify": {
       "source": "akillness/oh-my-skills",
       "sourceType": "github",
