@@ -1,0 +1,79 @@
+{
+  "skill_name": "graphify",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Map this repository with Graphify so I can understand the architecture before editing anything.",
+      "expected_output": "The skill classifies the request as a repo-structure packet, chooses one honest graph mode, scopes the repo, and reports durable graph artifacts.",
+      "assertions": [
+        "Response identifies a packet or equivalent mode classification for repo structure work",
+        "Response mentions GRAPH_REPORT.md, graph.json, or graph.html",
+        "Response scopes the repo or subtree explicitly instead of assuming the whole repo by default"
+      ]
+    },
+    {
+      "id": 2,
+      "prompt": "We already have a .graphify graph. What connects AuthModule to BillingService?",
+      "expected_output": "The skill uses graph-query follow-up behavior, reads the existing report/graph first, and avoids an unnecessary rebuild.",
+      "assertions": [
+        "Response starts from existing graph artifacts rather than forcing a rebuild",
+        "Response mentions query, path, or explain usage",
+        "Response references GRAPH_REPORT.md as the first reading surface"
+      ]
+    },
+    {
+      "id": 3,
+      "prompt": "Turn this docs + screenshots + notes folder into a persistent graph we can reuse next week.",
+      "expected_output": "The skill treats this as a mixed-corpus memory packet and chooses between local Graphify and structural fallback honestly.",
+      "assertions": [
+        "Response recognizes a mixed-corpus graphing request",
+        "Response mentions local build or structural fallback rather than only assistant-native install",
+        "Response labels fallback truthfully if native extraction is weak"
+      ]
+    },
+    {
+      "id": 4,
+      "prompt": "I just need to find where this config is defined and who references it.",
+      "expected_output": "The skill routes the request to codebase-search instead of forcing Graphify.",
+      "assertions": [
+        "Response routes simple locate/reference work to codebase-search or an equivalent neighboring search skill",
+        "Response does not insist on building a graph for a search-first request"
+      ]
+    },
+    {
+      "id": 5,
+      "prompt": "Build a graph for this service directory and then tell me what the busiest modules are. Give me the exact commands.",
+      "expected_output": "A CLI-first answer that scopes first, uses `graphify update` (never `graphify build`), then `graphify summary` / `query`, and names the real `.graphify/` artifact paths.",
+      "assertions": [
+        "Response uses `graphify update` as the build command",
+        "Response never invents a `graphify build` subcommand",
+        "Response scopes to the service directory rather than defaulting to the whole repo",
+        "Response uses `graphify summary` and/or `graphify query` for the follow-up instead of dumping graph.json",
+        "Response names artifacts under `.graphify/` and does not claim `graphify update` produces graph.html"
+      ]
+    },
+    {
+      "id": 6,
+      "prompt": "Install graphify for all our agents: jeo, jeopi, gjc and opencode.",
+      "expected_output": "Separates the CLI install from the skill install, routes jeo/jeopi/gjc through the shared ~/.agents/skills root, uses `graphify install opencode` only for sst/opencode, and states plainly that jeo/jeopi/gjc are not `graphify install` platform ids.",
+      "assertions": [
+        "Response installs the CLI with `pip install graphifyy` (or pipx) separately from the skill",
+        "Response states that `jeo`, `jeopi` and `gjc` are not valid `graphify install` platform ids",
+        "Response installs the skill into the shared `~/.agents/skills` root for jeo, jeopi and gjc",
+        "Response uses `graphify install opencode` for opencode and notes the sst/opencode flavor",
+        "Response does not claim a `graphify install jeo` or `graphify install agents` command exists"
+      ]
+    },
+    {
+      "id": 7,
+      "prompt": "We ran graphify update but every cluster is called 'Community 3'. Is the graph broken?",
+      "expected_output": "Explains that the graph is structurally complete but labeling/description generation degraded without an LLM backend, and offers `graphify update --fill-missing` (or `graphify label` / `graphify describe`) once a backend is configured.",
+      "assertions": [
+        "Response says the graph structure is intact rather than declaring the build failed",
+        "Response attributes placeholder `Community N` names to labeling falling back without an LLM backend",
+        "Response offers a concrete recovery command such as `graphify update --fill-missing`",
+        "Response does not present placeholder community names as meaningful clusters"
+      ]
+    }
+  ]
+}

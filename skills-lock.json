@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "graphify": {
+      "source": "akillness/oh-my-skills",
+      "sourceType": "github",
+      "skillPath": ".agent-skills/graphify/SKILL.md",
+      "computedHash": "3d625f6d3d0640d6cb47dc93a302dea469e341617dc8b72e2246ff72b7f6957a"
+    }
+  }
+}

@@ -1,0 +1,33 @@
+N:graphify
+D:Drive Graphify from its CLI to build, refresh, query, export, and serve a durable code/corpus knowledge graph. Use when the user wants `.graphify/GRAPH_REPORT.md`, `graph.json`, `graph.html`, `graphify update`/`summary`/`query`/`path`/`explain`/`tree`, change-aware review context, git-hook or watch-based refresh, a stdio MCP graph server, or an install into jeo, jeopi, gjc, opencode, Claude, Codex, or Gemini. Also covers the honest structural fallback when native extraction is empty or misleading. Route simple locate/reference work to codebase-search, narrative knowledge-base work to llm-wiki, and project-memory handoff to opencontext.
+G:knowledge-graph|codebase-analysis|graphrag|architecture|graphify|cli|corpus-analysis|persistent-memory
+U[7]:
+  Build a repo or mixed-corpus graph from the CLI with graphify scope then graphify update
+  Answer relationship questions from an existing graph with summary, query, path, explain, or tree
+  Export the graph to html, wiki, obsidian, svg, graphml, neo4j, or spanner artifacts
+  Keep a graph fresh with check-update, watch, or git hooks instead of ad-hoc rebuilds
+  Produce change-aware review context, affected execution flows, or diff risk scoring for a PR
+  Install Graphify for jeo, jeopi, gjc via the shared ~/.agents/skills root, or opencode/Claude/Codex/Gemini via graphify install
+  Fall back to an honest structural graph when native extraction returns empty or misleading output
+S[8]{n,action,details}:
+  1,Normalize packet,Classify as repo-structure, relationship-trace, mixed-corpus-memory, review-diff, install, or refresh/fallback
+  2,Choose CLI mode,Pick one: cli-build, cli-query, cli-export, incremental-refresh, review-context, agent-serve, install, or structural-fallback
+  3,Scope first,Run graphify scope and pick the smallest subtree; use --scope auto|committed|tracked|all and .graphifyignore
+  4,Build or reuse,graphify update . writes .graphify/graph.json and .graphify/GRAPH_REPORT.md; graphify build does not exist
+  5,Query narrowly,graphify summary first then query --budget, explain, path, tree instead of pasting graph.json
+  6,Report degradation,Say when community labeling or descriptions fell back to placeholders and offer graphify update --fill-missing
+  7,Route out,codebase-search for locate/reference, llm-wiki for narrative knowledge, opencontext for project memory, survey for tool comparison
+  8,Return brief,Packet, mode, commands run, scope, artifacts, degraded/fallback status, next commands, one route-out
+R[8]:
+  Never invent a graphify subcommand; graphify build does not exist, the build command is graphify update
+  Write .graphify/, not graphify-out/; legacy layouts need graphify migrate-state
+  graph.html comes from graphify export html, not from graphify update
+  jeo, jeopi and gjc are not graphify install platform ids; install the skill into ~/.agents/skills instead
+  Prefer GRAPH_REPORT.md and graphify summary before raw graph.json, and cap traversals with query --budget
+  Report placeholder Community N labels and missing descriptions as degraded output, not success
+  Run graphify portable-check before committing .graphify artifacts
+  After a wiki build or pip install --upgrade graphifyy, run scripts/patch_wikilink.py if [[...]] links break; it is idempotent
+E[3]{desc,in,out}:
+  "CLI build then orientation","build a graph for this service dir and tell me the busiest modules","graphify scope, graphify update <dir>, graphify summary; reports .graphify/GRAPH_REPORT.md and graph.json"
+  "Multi-agent install","install graphify for jeo, jeopi, gjc and opencode","pip install graphifyy, skill into ~/.agents/skills via -a universal, optional graphify install opencode; states jeo/jeopi/gjc are not platform ids"
+  "Search request misrouted as graphing","find where this config is defined and who references it","Routes to codebase-search instead of building a graph"
