@@ -92,7 +92,7 @@ ul{margin:0;padding:0;list-style:none}
   padding:1.1rem clamp(1rem,2.5vw,2rem);
   margin:.9rem;
 }
-.nav__brand{display:flex;align-items:center;gap:.6rem;font-weight:700;letter-spacing:.02em}
+.nav__brand{display:flex;align-items:center;gap:.6rem;font-weight:700;letter-spacing:.02em;min-width:0}
 .nav__mark{width:30px;height:30px;display:grid;place-items:center;color:#fff}
 .nav__mark svg{width:30px;height:30px;fill:currentColor}
 .nav__word{font-size:1.05rem;text-transform:uppercase}
@@ -171,7 +171,7 @@ ul{margin:0;padding:0;list-style:none}
   margin-bottom:clamp(1.25rem,4vh,2.5rem);
   padding:1.25rem 1.35rem 1.1rem;
   border-radius:14px;
-  background:rgba(255,255,255,.14);
+  background:rgba(8,40,86,.42);
   border:1px solid rgba(255,255,255,.28);
   backdrop-filter:blur(14px);
   -webkit-backdrop-filter:blur(14px);
@@ -202,6 +202,7 @@ ul{margin:0;padding:0;list-style:none}
   border-radius:10px;
   font-weight:600;font-size:.92rem;
   transition:transform .18s ease, background .18s ease, color .18s ease;
+  min-width:0;
 }
 .btn:hover{transform:translateY(-2px)}
 .btn__icon{
@@ -381,7 +382,6 @@ ul{margin:0;padding:0;list-style:none}
   .stage__caption{
     grid-area:cap;
     justify-self:stretch;width:auto;margin-bottom:0;
-    background:rgba(8,40,86,.42);
   }
 
   /* Narrow screens: raise the type so it crosses the heads and rackets
