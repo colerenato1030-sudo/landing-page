@@ -1,0 +1,9 @@
+{
+  "port": 8787,
+  "providers": [
+    { "name": "anthropic-sonnet", "type": "anthropic", "model": "claude-sonnet-4-5-20250929", "apiKeyEnv": "ANTHROPIC_API_KEY" },
+    { "name": "anthropic-haiku", "type": "anthropic", "model": "claude-haiku-4-5-20251001", "apiKeyEnv": "ANTHROPIC_API_KEY" },
+    { "name": "openai-gpt4o-mini", "type": "openai", "model": "gpt-4o-mini", "apiKeyEnv": "OPENAI_API_KEY" },
+    { "name": "gemini-flash", "type": "gemini", "model": "gemini-2.0-flash", "apiKeyEnv": "GEMINI_API_KEY" }
+  ]
+}
