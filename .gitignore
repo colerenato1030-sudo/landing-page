@@ -25,3 +25,8 @@
 
 # derived by build_preview.py
 preview.html
+
+# tooling, not part of the site
+node_modules/
+package.json
+package-lock.json
