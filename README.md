@@ -49,3 +49,17 @@ exists — the nails crop is the only one showing its actual subject.
 ```bash
 python3 build_preview.py
 ```
+
+## Finish photography
+
+The four frames in the finishes band render as CSS lacquer chips — the
+finish's own colour under a raking highlight — because the photography has
+not landed yet. Each is a `div.finish-frame[data-finish]`. To use a real
+photo, swap the div for an image and drop the attribute:
+
+```html
+<img class="finish-frame" src="assets/finish-blush.jpg" alt="The palest blush wash, almost bare">
+```
+
+`.finish-frame` already carries the aspect ratio, radius and `object-fit`,
+so nothing else changes. Removing `data-finish` drops the highlight overlay.
