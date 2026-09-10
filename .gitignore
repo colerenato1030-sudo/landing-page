@@ -22,3 +22,6 @@
 .idea/
 *.swp
 *.swo
+
+# derived by build_preview.py
+preview.html
