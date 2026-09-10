@@ -145,6 +145,65 @@
       : 'That address does not look right. Try again?';
   });
 
+  /* ---------- studio hours ---------- */
+
+  // Opening hours as [open, close] in 24h, indexed by day with Sunday at 0.
+  // Must stay in step with the list rendered in the markup.
+  const HOURS = {
+    0: [11, 17], 1: null, 2: [10, 19], 3: [10, 19],
+    4: [10, 20], 5: [10, 20], 6: [9, 18],
+  };
+  const DAYS = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  const clock = (h) => `${((h + 11) % 12) + 1}${h < 12 ? 'am' : 'pm'}`;
+
+  // The studio is in Manila, so the answer to "are they open?" is the same
+  // wherever the visitor happens to be reading from.
+  function studioNow() {
+    const parts = new Intl.DateTimeFormat('en-US', {
+      timeZone: 'Asia/Manila',
+      weekday: 'short',
+      hour: 'numeric',
+      minute: 'numeric',
+      hour12: false,
+    }).formatToParts(new Date());
+    const at = (type) => parts.find((p) => p.type === type).value;
+    const index = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
+    return {
+      day: index[at('weekday')],
+      minutes: (Number(at('hour')) % 24) * 60 + Number(at('minute')),
+    };
+  }
+
+  function currentStatus({ day, minutes }) {
+    const today = HOURS[day];
+    if (today && minutes >= today[0] * 60 && minutes < today[1] * 60) {
+      return { open: true, text: `Open now · until ${clock(today[1])}` };
+    }
+    for (let ahead = 0; ahead < 8; ahead++) {
+      const d = (day + ahead) % 7;
+      const hours = HOURS[d];
+      if (!hours) continue;
+      if (ahead === 0) {
+        if (minutes < hours[0] * 60) {
+          return { open: false, text: `Closed · opens today at ${clock(hours[0])}` };
+        }
+        continue;
+      }
+      const when = ahead === 1 ? 'tomorrow' : DAYS[d];
+      return { open: false, text: `Closed · opens ${when} at ${clock(hours[0])}` };
+    }
+    return { open: false, text: 'Closed' };
+  }
+
+  const statusEl = document.getElementById('visit-status');
+  const hoursList = document.getElementById('hours-list');
+  const now = studioNow();
+  const status = currentStatus(now);
+
+  document.getElementById('visit-status-text').textContent = status.text;
+  statusEl.classList.toggle('is-open', status.open);
+  hoursList.querySelector(`[data-day="${now.day}"]`)?.classList.add('is-today');
+
   /* ---------- nav reflects the section in view ---------- */
 
   const links = [...panel.querySelectorAll('a')];

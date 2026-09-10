@@ -775,43 +775,44 @@ h2 em { font-style: italic; }
    Wear timeline
    ========================================================================== */
 
-.timeline {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-  gap: clamp(16px, 2vw, 28px);
-  counter-reset: stage;
+.wear { margin: 0; }
+
+/* The drawing carries its own scale, so below roughly 700px it scrolls in
+   its own track rather than shrinking the labels past readability. */
+.wear-scroll { overflow-x: auto; }
+.wear-scroll svg { display: block; width: 100%; min-width: 660px; height: auto; }
+
+.wear figcaption {
+  margin-top: clamp(14px, 1.8vw, 22px);
+  max-width: 62ch;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--on-light-muted);
 }
 
-.stage {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  padding-top: 20px;
+/* Columns line up with the diagram's four nodes, which sit at the centres
+   of exactly these tracks. */
+.stage-notes {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 30px);
+  list-style: none;
+  margin-top: clamp(28px, 3.6vw, 46px);
+  padding-top: clamp(22px, 2.6vw, 32px);
   border-top: 1px solid var(--rule-light);
 }
 
 .stage-when {
-  display: flex;
-  align-items: baseline;
-  gap: 10px;
-  font-size: 13px;
-  letter-spacing: 0.14em;
+  margin-bottom: 8px;
+  font-size: 12px;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--copper);
   font-variant-numeric: tabular-nums;
 }
 
-.stage figure {
-  background: var(--pearl-sunk);
-  border-radius: 12px;
-  padding: 18px;
-  display: grid;
-  place-items: center;
-}
-.stage figure svg { width: 100%; height: auto; max-width: 130px; }
-
-.stage h3 { font-size: 16px; font-weight: 500; }
-.stage p { font-size: 14px; line-height: 1.6; color: var(--on-light-muted); }
+.stage-notes h3 { font-size: 16px; font-weight: 500; margin-bottom: 6px; }
+.stage-notes p { font-size: 14px; line-height: 1.58; color: var(--on-light-muted); }
 
 /* ==========================================================================
    Split quote
@@ -876,40 +877,114 @@ blockquote {
    Visit
    ========================================================================== */
 
-.visit-grid {
+.visit-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  border: 1px solid var(--rule-light);
+  border-radius: 999px;
+  font-size: 14px;
+  color: var(--on-light-muted);
+}
+
+/* Semantic, and deliberately not the champagne accent: this reports state
+   rather than inviting a click. */
+.visit-status .dot {
+  width: 8px;
+  height: 8px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--on-light-muted);
+}
+.visit-status.is-open { color: var(--on-light); }
+.visit-status.is-open .dot { background: #3F7A56; }
+
+.visit-cols {
   display: grid;
-  grid-template-columns: 1.1fr 1fr;
-  gap: clamp(28px, 5vw, 80px);
-  align-items: start;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: clamp(26px, 4vw, 64px);
 }
 
-.hours { width: 100%; border-collapse: collapse; margin-top: 22px; }
-.hours th, .hours td { text-align: left; padding: 13px 0; border-bottom: 1px solid var(--rule-light); font-weight: 400; }
-.hours th { color: var(--on-light-muted); font-size: 14px; }
-.hours td { font-variant-numeric: tabular-nums; font-size: 14px; }
-.hours tr:last-child th, .hours tr:last-child td { border-bottom: none; }
-
-.visit-card {
-  background: var(--pearl-sunk);
-  border-radius: var(--radius);
-  padding: clamp(24px, 3vw, 38px);
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-
-.visit-card dl { display: grid; gap: 16px; }
-.visit-card dt {
+.visit-col h3 {
+  margin-bottom: 4px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--rule-light);
   font-size: 11px;
-  letter-spacing: 0.18em;
+  font-weight: 500;
+  letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--on-light-muted);
-  margin-bottom: 4px;
 }
-.visit-card dd { font-size: 15px; line-height: 1.55; }
-.visit-card a { color: inherit; }
-/* the column stretches its children by default; the pill should hug its label */
-.visit-card .btn { align-self: flex-start; }
+
+.hours-list { list-style: none; }
+
+.hours-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 11px 0;
+  font-size: 14px;
+  color: var(--on-light-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.hours-list li.is-today {
+  margin-inline: -14px;
+  padding-inline: 14px;
+  border-radius: 8px;
+  background: var(--pearl-sunk);
+  color: var(--on-light);
+}
+
+.visit-col address {
+  padding-top: 14px;
+  font-style: normal;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+.visit-col > p {
+  margin-top: 14px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--on-light-muted);
+}
+
+.visit-notes { list-style: none; padding-top: 14px; display: grid; gap: 13px; }
+
+.visit-notes li {
+  position: relative;
+  padding-left: 20px;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--on-light-muted);
+}
+
+.visit-notes li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--copper);
+}
+
+.visit-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: clamp(30px, 4vw, 50px);
+  padding-top: clamp(24px, 3vw, 34px);
+  border-top: 1px solid var(--rule-light);
+}
+
+.visit-cta p { display: flex; gap: 12px; flex-wrap: wrap; font-size: 15px; }
+.visit-cta p a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
 
 /* ==========================================================================
    Newsletter
@@ -1023,7 +1098,6 @@ blockquote {
 @media (max-width: 1000px) {
   .quote-split { grid-template-columns: 1fr; }
   .quote-art { min-height: 300px; }
-  .visit-grid { grid-template-columns: 1fr; }
   .footer-top { grid-template-columns: 1fr 1fr; }
 }
 
@@ -1103,10 +1177,16 @@ blockquote {
   .tabs { grid-template-columns: 1fr; gap: 0; }
   .tab { padding-block: 14px; }
   .tab[aria-selected='true'] { padding-top: 13px; }
+
+  /* The diagram scrolls in its own track at this width, so the notes stop
+     tracking its four columns and become a readable pair instead. */
+  .stage-notes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 640px) {
   .section-head { align-items: flex-start; }
+  .stage-notes { grid-template-columns: 1fr; gap: 22px; }
+  .visit-cta { flex-direction: column; align-items: flex-start; }
 
   /* A ten-item menu of tall picture cards turns into a scroll marathon on a
      phone, so each treatment collapses to a single readable row. */
