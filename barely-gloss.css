@@ -523,13 +523,17 @@ h2 em { font-style: italic; }
 }
 .treatment:hover { transform: translateY(-3px); }
 
+/* Square rather than landscape: the studio photography is shot down the
+   hand, so a wide crop would cut the nails it exists to show. */
 .treatment-art {
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 1 / 1;
   display: grid;
   place-items: center;
+  overflow: hidden;
   background: linear-gradient(150deg, #EFE9E2 0%, #DCD3C8 100%);
 }
-.treatment-art svg { width: 58%; height: auto; }
+.treatment-art svg { width: 52%; height: auto; }
+.treatment-art img { width: 100%; height: 100%; object-fit: cover; }
 
 .treatment-body {
   display: flex;

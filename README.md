@@ -38,9 +38,15 @@ connected component and feathering the edge.
 
 ## Imagery
 
-There is one photograph. `card-nails`, `card-lashes`, `card-spa` and `quote`
-are all crops of it. Replace them with real lash and spa photography when it
-exists — the nails crop is the only one showing its actual subject.
+Studio photography exists for the four nail treatments only (`treat-*.webp`,
+cropped square from the masters in `assets/source/`). Everything else is a
+crop of the hero photograph: `card-nails`, `card-lashes`, `card-spa` and
+`quote`.
+
+The lash and spa treatment cards therefore still carry drawn motifs, which
+is why the menu grid mixes photographs and line art. Shooting those six
+services is what closes the gap; the swap is `<div class="treatment-art">`
+contents only, nothing else changes.
 
 ## Publishing
 
