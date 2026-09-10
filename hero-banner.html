@@ -7,6 +7,9 @@
     --muted: rgba(255, 255, 255, 0.74);
     --cool: 46, 154, 216;
     --warm: 222, 84, 44;
+    /* one glass recipe, shared by the nav and the service cards */
+    --glass: rgba(8, 8, 10, 0.42);
+    --glass-edge: rgba(255, 255, 255, 0.2);
     --font-display: 'Playfair Display', 'Didot', 'Bodoni MT', Georgia, serif;
     --font-body: 'Instrument Sans', 'Helvetica Neue', system-ui, sans-serif;
 
@@ -102,7 +105,10 @@
   .nav {
     position: relative;
     z-index: 2;
-    display: flex;
+    /* Side columns take equal space so the pill centres on the frame, not
+       on whatever room the brand and the icons leave over. */
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
     gap: clamp(16px, 3vw, 40px);
   }
@@ -117,26 +123,37 @@
 
   .nav-links {
     display: flex;
-    justify-content: center;
-    flex: 1;
-    gap: clamp(18px, 3vw, 46px);
+    align-items: center;
+    gap: clamp(2px, 0.4vw, 8px);
     list-style: none;
     font-size: clamp(13px, 1.05vw, 16px);
+    padding: 5px;
+    border-radius: 999px;
+    background: var(--glass);
+    border: 1px solid var(--glass-edge);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
   }
 
   .nav-links a {
+    display: block;
     color: var(--pearl);
     text-decoration: none;
-    padding-bottom: 5px;
-    border-bottom: 1.5px solid transparent;
-    opacity: 0.86;
-    transition: border-color 0.25s, opacity 0.25s;
+    padding: 8px clamp(12px, 1.3vw, 22px);
+    border-radius: 999px;
+    opacity: 0.82;
+    transition: background-color 0.25s, opacity 0.25s;
   }
 
-  .nav-links a:hover { opacity: 1; }
-  .nav-links a[aria-current='page'] { opacity: 1; border-bottom-color: var(--pearl); }
+  .nav-links a:hover { opacity: 1; background: rgba(255, 255, 255, 0.08); }
+  .nav-links a[aria-current='page'] { opacity: 1; background: rgba(255, 255, 255, 0.15); }
 
-  .nav-tools { display: flex; align-items: center; gap: clamp(14px, 1.6vw, 24px); }
+  .nav-tools {
+    justify-self: end;
+    display: flex;
+    align-items: center;
+    gap: clamp(14px, 1.6vw, 24px);
+  }
 
   .icon-btn {
     background: none;
@@ -176,6 +193,15 @@
     white-space: nowrap;
     /* italic descenders sit outside the em box; keep them off the clip edge */
     padding: 0.08em 0.06em 0.16em;
+    /* text-shadow cannot cross background-clip:text, but drop-shadow filters
+       the rendered glyph. Four passes: a lit top edge, a contact shadow that
+       sharpens the letterform, then two falloffs that lift the whole word off
+       a busy photograph. */
+    filter:
+      drop-shadow(0 -1px 0 rgba(255, 255, 255, 0.24))
+      drop-shadow(0 2px 1px rgba(0, 0, 0, 0.55))
+      drop-shadow(0 8px 22px rgba(0, 0, 0, 0.68))
+      drop-shadow(0 20px 54px rgba(0, 0, 0, 0.5));
   }
 
   .wordmark span {
@@ -236,11 +262,11 @@
     justify-content: space-between;
     gap: 16px;
     padding: clamp(16px, 1.5vw, 24px) clamp(18px, 1.6vw, 26px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid var(--glass-edge);
     border-radius: 14px;
     /* dark glass, not light: these sit over bright silk as often as over
        the black ground, and white type has to hold on both */
-    background: rgba(8, 8, 10, 0.42);
+    background: var(--glass);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
   }
@@ -284,9 +310,16 @@
         rgba(5,5,6,0.56) 56%, rgba(5,5,6,0.62) 100%);
     }
 
-    .nav { flex-wrap: wrap; row-gap: 16px; }
-    .nav-links { order: 3; flex-basis: 100%; justify-content: flex-start; }
-    .nav-tools { margin-left: auto; }
+    /* Brand and icons hold the top row; the pill drops to its own row. */
+    .nav { grid-template-columns: 1fr auto; row-gap: 16px; }
+    .brand { grid-area: 1 / 1; }
+    .nav-tools { grid-area: 1 / 2; }
+    .nav-links {
+      grid-area: 2 / 1 / 3 / -1;
+      justify-self: start;
+      font-size: 13px;
+    }
+    .nav-links a { padding: 8px 12px; }
 
     /* No room to flank; the wordmark leads and the blurbs pair beneath it. */
     .masthead { padding-top: 0; row-gap: clamp(18px, 4vw, 30px); }
