@@ -1,355 +1,255 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Barely Gloss - Luxury Beauty</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap">
-    <style>
-        :root {
-            --color-dark: #0F0F0F;
-            --color-dark-overlay: #1A1A1A;
-            --color-accent: #D4A574;
-            --color-text-primary: #FFFFFF;
-            --color-text-secondary: #E8E8E8;
-            --color-cream: #F5F3F0;
-            --font-display: 'Playfair Display', serif;
-            --font-body: 'Inter', sans-serif;
-        }
+<title>Barely Gloss</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Jost:wght@300;400;500&display=swap">
+<style>
+  :root {
+    --ink: #08080A;
+    --ink-soft: #14141A;
+    --pearl: #EDE7E0;
+    --pearl-dim: #A8A29B;
+    --cognac: #B07D4A;
+    --font-display: 'Cormorant Garamond', 'Didot', Georgia, serif;
+    --font-body: 'Jost', 'Futura', system-ui, sans-serif;
+  }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        body {
-            background: var(--color-dark);
-            color: var(--color-text-primary);
-            font-family: var(--font-body);
-            overflow-x: hidden;
-        }
+  body {
+    background: var(--ink);
+    color: var(--pearl);
+    font-family: var(--font-body);
+    font-weight: 300;
+  }
 
-        /* Hero Section */
-        .hero {
-            position: relative;
-            width: 100%;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            background: var(--color-dark);
-        }
+  .hero {
+    position: relative;
+    min-height: 660px;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+    padding: 0 clamp(20px, 5vw, 64px);
+    overflow: hidden;
+    isolation: isolate;
+  }
 
-        .hero-background {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #0F0F0F 0%, #1A1A1A 50%, #0F0F0F 100%);
-            z-index: 0;
-        }
+  /* The photograph. Anchored right-of-centre so the hands stay whole
+     and the black upper-left stays clear for type. */
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background-color: var(--ink);
+    background-image: url('assets/hero-hands.jpg');
+    background-size: cover;
+    background-position: 68% 50%;
+  }
 
-        .hero-image {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.4;
-            z-index: 1;
-        }
+  /* Scrim: deepens the left so type holds, leaves the silk and the
+     lamp glow untouched on the right. */
+  .hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background:
+      linear-gradient(100deg, rgba(8,8,10,0.94) 0%, rgba(8,8,10,0.72) 34%, rgba(8,8,10,0.12) 62%, transparent 78%),
+      linear-gradient(to bottom, rgba(8,8,10,0.55) 0%, transparent 22%);
+  }
 
-        /* Geometric Overlay Elements */
-        .geometric-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 2;
-            background:
-                linear-gradient(90deg, transparent 0%, rgba(212, 165, 116, 0.05) 40%, transparent 100%),
-                linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.7) 100%);
-        }
+  /* ---- nav ---- */
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    padding-block: 28px;
+    flex-wrap: wrap;
+  }
 
-        .geometric-accent {
-            position: absolute;
-            border: 2px solid var(--color-accent);
-            opacity: 0.3;
-        }
+  .mark {
+    font-family: var(--font-display);
+    font-size: 20px;
+    letter-spacing: 0.34em;
+    text-transform: uppercase;
+    text-indent: 0.34em;
+    color: var(--pearl);
+  }
 
-        .accent-1 {
-            width: 250px;
-            height: 250px;
-            top: 5%;
-            right: 10%;
-            border-radius: 50%;
-        }
+  .nav-links {
+    display: flex;
+    gap: clamp(20px, 3vw, 44px);
+    list-style: none;
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
 
-        .accent-2 {
-            width: 150px;
-            height: 150px;
-            bottom: 15%;
-            left: 5%;
-            border-radius: 0;
-        }
+  .nav-links a {
+    color: var(--pearl-dim);
+    text-decoration: none;
+    padding-block: 4px;
+    border-bottom: 1px solid transparent;
+    transition: color 0.3s, border-color 0.3s;
+  }
 
-        .accent-3 {
-            width: 2px;
-            height: 40%;
-            top: 20%;
-            left: 50%;
-            transform: translateX(-50%);
-            background: linear-gradient(180deg, var(--color-accent) 0%, transparent 100%);
-            opacity: 0.5;
-        }
+  .nav-links a:hover,
+  .nav-links a:focus-visible {
+    color: var(--pearl);
+    border-bottom-color: var(--cognac);
+  }
 
-        /* Content Container */
-        .hero-content {
-            position: relative;
-            z-index: 3;
-            text-align: center;
-            max-width: 700px;
-            padding: 40px 20px;
-            animation: fadeIn 1s ease-out;
-        }
+  /* ---- content ---- */
+  .hero-body {
+    display: flex;
+    align-items: center;
+    padding-block: clamp(48px, 9vw, 104px);
+  }
 
-        .hero-tagline {
-            font-size: 14px;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--color-accent);
-            margin-bottom: 20px;
-            font-weight: 500;
-            word-spacing: 2px;
-        }
+  .stack { max-width: 30rem; }
 
-        .hero-headline {
-            font-family: var(--font-display);
-            font-size: clamp(48px, 8vw, 80px);
-            font-weight: 600;
-            line-height: 1.1;
-            margin-bottom: 30px;
-            color: var(--color-text-primary);
-            letter-spacing: -1px;
-        }
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 11px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--cognac);
+    margin-bottom: clamp(20px, 3vw, 30px);
+  }
 
-        .hero-headline .accent {
-            color: var(--color-accent);
-        }
+  .eyebrow::after {
+    content: '';
+    height: 1px;
+    width: 56px;
+    background: linear-gradient(90deg, var(--cognac), transparent);
+  }
 
-        .hero-subheading {
-            font-size: clamp(16px, 2vw, 18px);
-            line-height: 1.6;
-            color: var(--color-text-secondary);
-            margin-bottom: 40px;
-            font-weight: 300;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(52px, 9.5vw, 104px);
+    line-height: 0.94;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+    margin-bottom: clamp(22px, 3vw, 30px);
+  }
 
-        /* CTA Button */
-        .cta-group {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
+  h1 em {
+    font-style: italic;
+    color: var(--cognac);
+  }
 
-        .cta-button {
-            padding: 16px 48px;
-            font-size: 14px;
-            font-weight: 500;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            border: none;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: var(--font-body);
-        }
+  .lede {
+    font-size: clamp(15px, 1.5vw, 17px);
+    line-height: 1.65;
+    color: var(--pearl-dim);
+    max-width: 34ch;
+    margin-bottom: clamp(30px, 4vw, 42px);
+  }
 
-        .cta-primary {
-            background: var(--color-accent);
-            color: var(--color-dark);
-            border-radius: 2px;
-        }
+  .actions { display: flex; gap: 14px; flex-wrap: wrap; }
 
-        .cta-primary:hover {
-            background: var(--color-cream);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(212, 165, 116, 0.2);
-        }
+  .btn {
+    font-family: var(--font-body);
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 15px 34px;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+  }
 
-        .cta-secondary {
-            background: transparent;
-            color: var(--color-text-primary);
-            border: 2px solid var(--color-text-secondary);
-            border-radius: 2px;
-        }
+  .btn-solid {
+    background: var(--pearl);
+    color: var(--ink);
+  }
 
-        .cta-secondary:hover {
-            border-color: var(--color-accent);
-            color: var(--color-accent);
-            transform: translateY(-2px);
-        }
+  .btn-solid:hover,
+  .btn-solid:focus-visible {
+    background: var(--cognac);
+    color: var(--pearl);
+  }
 
-        /* Scroll Indicator */
-        .scroll-indicator {
-            position: absolute;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 4;
-            animation: bounce 2s infinite;
-        }
+  .btn-line {
+    background: transparent;
+    color: var(--pearl);
+    border-color: rgba(237, 231, 224, 0.32);
+  }
 
-        .scroll-line {
-            width: 1px;
-            height: 30px;
-            background: var(--color-accent);
-            margin: 0 auto;
-            opacity: 0.6;
-        }
+  .btn-line:hover,
+  .btn-line:focus-visible {
+    border-color: var(--cognac);
+    color: var(--cognac);
+  }
 
-        .scroll-text {
-            font-size: 12px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            color: var(--color-accent);
-            text-align: center;
-            margin-top: 10px;
-        }
+  :focus-visible { outline: 2px solid var(--cognac); outline-offset: 3px; }
 
-        /* Animations */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+  /* ---- footer strip: the brand's actual claims ---- */
+  .strip {
+    display: flex;
+    gap: clamp(20px, 4vw, 56px);
+    flex-wrap: wrap;
+    padding-block: 24px 32px;
+    border-top: 1px solid rgba(237, 231, 224, 0.14);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--pearl-dim);
+  }
 
-        @keyframes bounce {
-            0%, 100% {
-                transform: translateX(-50%) translateY(0);
-            }
-            50% {
-                transform: translateX(-50%) translateY(10px);
-            }
-        }
+  @media (max-width: 860px) {
+    /* Type moves off the photo's left edge and onto a full scrim,
+       since there's no room for a side-by-side read. */
+    .hero::before { background-position: 60% 42%; }
+    .hero::after {
+      background:
+        linear-gradient(to bottom, rgba(8,8,10,0.92) 0%, rgba(8,8,10,0.70) 46%, rgba(8,8,10,0.34) 100%);
+    }
+    .stack { max-width: none; }
+    .lede { max-width: 40ch; }
+  }
 
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .hero {
-                min-height: 80vh;
-            }
+  @media (max-width: 460px) {
+    .nav-links { gap: 18px; font-size: 11px; }
+    .btn { flex: 1 1 100%; text-align: center; }
+  }
 
-            .hero-headline {
-                font-size: clamp(36px, 6vw, 56px);
-            }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+</style>
 
-            .hero-subheading {
-                font-size: 15px;
-                margin-bottom: 30px;
-            }
+<section class="hero">
+  <nav class="nav">
+    <span class="mark">Barely Gloss</span>
+    <ul class="nav-links">
+      <li><a href="#collection">Collection</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#ritual">Ritual</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
 
-            .accent-1 {
-                width: 150px;
-                height: 150px;
-                top: 10%;
-                right: 5%;
-            }
+  <div class="hero-body">
+    <div class="stack">
+      <p class="eyebrow">Clean luxury cosmetics</p>
+      <h1>Bare.<br>Bold.<br><em>Beautiful.</em></h1>
+      <p class="lede">
+        Small-batch skincare and colour, formulated to read as skin —
+        never as makeup.
+      </p>
+      <div class="actions">
+        <button class="btn btn-solid">Discover the collection</button>
+        <button class="btn btn-line">Our story</button>
+      </div>
+    </div>
+  </div>
 
-            .accent-2 {
-                width: 100px;
-                height: 100px;
-                bottom: 20%;
-                left: 2%;
-            }
-
-            .cta-group {
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            .cta-button {
-                width: 100%;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero-content {
-                padding: 30px 15px;
-            }
-
-            .hero-headline {
-                font-size: 36px;
-            }
-
-            .hero-subheading {
-                font-size: 14px;
-            }
-
-            .cta-button {
-                padding: 14px 32px;
-                font-size: 12px;
-            }
-
-            .accent-1 {
-                width: 100px;
-                height: 100px;
-            }
-
-            .accent-2 {
-                display: none;
-            }
-        }
-    </style>
-</head>
-<body>
-    <section class="hero">
-        <div class="hero-background"></div>
-
-        <!-- Placeholder for hero image - will be replaced with actual beauty product image -->
-        <div class="hero-image" style="background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);"></div>
-
-        <!-- Geometric Overlays -->
-        <div class="geometric-overlay"></div>
-        <div class="geometric-accent accent-1"></div>
-        <div class="geometric-accent accent-2"></div>
-        <div class="geometric-accent accent-3"></div>
-
-        <!-- Content -->
-        <div class="hero-content">
-            <div class="hero-tagline">Luxury Beauty Refined</div>
-            <h1 class="hero-headline">
-                <span>Bare.</span><br>
-                <span><span class="accent">Bold.</span></span><br>
-                <span>Beautiful.</span>
-            </h1>
-            <p class="hero-subheading">
-                Luxury skincare and cosmetics that celebrate your natural beauty with elegance, sustainability, and authentic confidence.
-            </p>
-
-            <div class="cta-group">
-                <button class="cta-button cta-primary">Discover Collection</button>
-                <button class="cta-button cta-secondary">Our Story</button>
-            </div>
-        </div>
-
-        <!-- Scroll Indicator -->
-        <div class="scroll-indicator">
-            <div class="scroll-line"></div>
-            <div class="scroll-text">Scroll</div>
-        </div>
-    </section>
-</body>
-</html>
+  <div class="strip">
+    <span>Vegan &amp; cruelty-free</span>
+    <span>Small-batch formulation</span>
+    <span>Refillable glass</span>
+  </div>
+</section>
