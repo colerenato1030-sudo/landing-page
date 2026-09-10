@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barely Gloss - Luxury Beauty</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap">
+    <style>
+        :root {
+            --color-dark: #0F0F0F;
+            --color-dark-overlay: #1A1A1A;
+            --color-accent: #D4A574;
+            --color-text-primary: #FFFFFF;
+            --color-text-secondary: #E8E8E8;
+            --color-cream: #F5F3F0;
+            --font-display: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--color-dark);
+            color: var(--color-text-primary);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: var(--color-dark);
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0F0F0F 0%, #1A1A1A 50%, #0F0F0F 100%);
+            z-index: 0;
+        }
+
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.4;
+            z-index: 1;
+        }
+
+        /* Geometric Overlay Elements */
+        .geometric-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            background:
+                linear-gradient(90deg, transparent 0%, rgba(212, 165, 116, 0.05) 40%, transparent 100%),
+                linear-gradient(180deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.7) 100%);
+        }
+
+        .geometric-accent {
+            position: absolute;
+            border: 2px solid var(--color-accent);
+            opacity: 0.3;
+        }
+
+        .accent-1 {
+            width: 250px;
+            height: 250px;
+            top: 5%;
+            right: 10%;
+            border-radius: 50%;
+        }
+
+        .accent-2 {
+            width: 150px;
+            height: 150px;
+            bottom: 15%;
+            left: 5%;
+            border-radius: 0;
+        }
+
+        .accent-3 {
+            width: 2px;
+            height: 40%;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(180deg, var(--color-accent) 0%, transparent 100%);
+            opacity: 0.5;
+        }
+
+        /* Content Container */
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            max-width: 700px;
+            padding: 40px 20px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .hero-tagline {
+            font-size: 14px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--color-accent);
+            margin-bottom: 20px;
+            font-weight: 500;
+            word-spacing: 2px;
+        }
+
+        .hero-headline {
+            font-family: var(--font-display);
+            font-size: clamp(48px, 8vw, 80px);
+            font-weight: 600;
+            line-height: 1.1;
+            margin-bottom: 30px;
+            color: var(--color-text-primary);
+            letter-spacing: -1px;
+        }
+
+        .hero-headline .accent {
+            color: var(--color-accent);
+        }
+
+        .hero-subheading {
+            font-size: clamp(16px, 2vw, 18px);
+            line-height: 1.6;
+            color: var(--color-text-secondary);
+            margin-bottom: 40px;
+            font-weight: 300;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* CTA Button */
+        .cta-group {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            padding: 16px 48px;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: var(--font-body);
+        }
+
+        .cta-primary {
+            background: var(--color-accent);
+            color: var(--color-dark);
+            border-radius: 2px;
+        }
+
+        .cta-primary:hover {
+            background: var(--color-cream);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(212, 165, 116, 0.2);
+        }
+
+        .cta-secondary {
+            background: transparent;
+            color: var(--color-text-primary);
+            border: 2px solid var(--color-text-secondary);
+            border-radius: 2px;
+        }
+
+        .cta-secondary:hover {
+            border-color: var(--color-accent);
+            color: var(--color-accent);
+            transform: translateY(-2px);
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 4;
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 30px;
+            background: var(--color-accent);
+            margin: 0 auto;
+            opacity: 0.6;
+        }
+
+        .scroll-text {
+            font-size: 12px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--color-accent);
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateX(-50%) translateY(0);
+            }
+            50% {
+                transform: translateX(-50%) translateY(10px);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero {
+                min-height: 80vh;
+            }
+
+            .hero-headline {
+                font-size: clamp(36px, 6vw, 56px);
+            }
+
+            .hero-subheading {
+                font-size: 15px;
+                margin-bottom: 30px;
+            }
+
+            .accent-1 {
+                width: 150px;
+                height: 150px;
+                top: 10%;
+                right: 5%;
+            }
+
+            .accent-2 {
+                width: 100px;
+                height: 100px;
+                bottom: 20%;
+                left: 2%;
+            }
+
+            .cta-group {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .cta-button {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-content {
+                padding: 30px 15px;
+            }
+
+            .hero-headline {
+                font-size: 36px;
+            }
+
+            .hero-subheading {
+                font-size: 14px;
+            }
+
+            .cta-button {
+                padding: 14px 32px;
+                font-size: 12px;
+            }
+
+            .accent-1 {
+                width: 100px;
+                height: 100px;
+            }
+
+            .accent-2 {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <div class="hero-background"></div>
+
+        <!-- Placeholder for hero image - will be replaced with actual beauty product image -->
+        <div class="hero-image" style="background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);"></div>
+
+        <!-- Geometric Overlays -->
+        <div class="geometric-overlay"></div>
+        <div class="geometric-accent accent-1"></div>
+        <div class="geometric-accent accent-2"></div>
+        <div class="geometric-accent accent-3"></div>
+
+        <!-- Content -->
+        <div class="hero-content">
+            <div class="hero-tagline">Luxury Beauty Refined</div>
+            <h1 class="hero-headline">
+                <span>Bare.</span><br>
+                <span><span class="accent">Bold.</span></span><br>
+                <span>Beautiful.</span>
+            </h1>
+            <p class="hero-subheading">
+                Luxury skincare and cosmetics that celebrate your natural beauty with elegance, sustainability, and authentic confidence.
+            </p>
+
+            <div class="cta-group">
+                <button class="cta-button cta-primary">Discover Collection</button>
+                <button class="cta-button cta-secondary">Our Story</button>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator">
+            <div class="scroll-line"></div>
+            <div class="scroll-text">Scroll</div>
+        </div>
+    </section>
+</body>
+</html>
