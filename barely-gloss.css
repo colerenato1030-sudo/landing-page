@@ -75,6 +75,10 @@ img { max-width: 100%; display: block; }
 }
 
 .section { padding-block: var(--section-y); }
+
+/* The header is fixed, so an anchor jump would otherwise land the section
+   heading underneath it. */
+section[id] { scroll-margin-top: clamp(76px, 8vw, 104px); }
 .section--light { background: var(--pearl); color: var(--on-light); }
 .section--dark { background: var(--ink); color: var(--on-dark); }
 
@@ -987,6 +991,195 @@ blockquote {
 .visit-cta p a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
 
 /* ==========================================================================
+   Booking
+   Context on the left, form on the right — the panel answers the questions
+   that otherwise stall someone halfway through filling it in.
+   ========================================================================== */
+
+.book-grid {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: clamp(24px, 3.4vw, 52px);
+  align-items: start;
+}
+
+.book-aside { display: grid; gap: clamp(14px, 1.6vw, 20px); }
+
+.book-shot { width: 100%; height: auto; border-radius: var(--radius); }
+
+.book-card {
+  padding: clamp(20px, 2.2vw, 30px);
+  border: 1px solid var(--rule-dark);
+  border-radius: var(--radius);
+  background: var(--ink-raised);
+}
+
+.book-card--warm { background: var(--ink-warm); border-color: rgba(180, 111, 53, 0.35); }
+
+.book-card h3 { font-size: 16px; font-weight: 500; margin-bottom: 14px; }
+.book-card p { font-size: 14px; line-height: 1.6; color: var(--on-dark-muted); }
+.book-card ul { list-style: none; display: grid; gap: 11px; }
+
+.book-card li {
+  position: relative;
+  padding-left: 20px;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--on-dark-muted);
+}
+
+.book-card li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.52em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--champagne);
+}
+
+/* ---------- form ---------- */
+
+.book-form {
+  display: grid;
+  gap: clamp(16px, 1.8vw, 22px);
+  padding: clamp(22px, 2.6vw, 38px);
+  border: 1px solid var(--rule-dark);
+  border-radius: var(--radius);
+  background: var(--ink-raised);
+}
+
+.field { display: grid; gap: 8px; min-width: 0; }
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(12px, 1.4vw, 18px); }
+
+.field label,
+.slots legend {
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--on-dark-muted);
+  padding: 0;
+}
+
+.field label span[aria-hidden] { color: var(--champagne); }
+.field .opt { letter-spacing: 0; text-transform: none; opacity: 0.6; }
+
+.book-form input,
+.book-form select,
+.book-form textarea {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1px solid var(--rule-dark);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.045);
+  color: var(--on-dark);
+  font-family: var(--font-body);
+  font-size: 15px;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+
+.book-form textarea { resize: vertical; line-height: 1.55; }
+.book-form ::placeholder { color: rgba(255, 255, 255, 0.34); }
+
+.book-form input:focus,
+.book-form select:focus,
+.book-form textarea:focus {
+  outline: none;
+  border-color: var(--champagne);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.book-form :focus-visible { outline: 2px solid var(--champagne); outline-offset: 2px; }
+
+/* date pickers render a near-black glyph on a dark field by default */
+.book-form input[type='date']::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+.book-form [aria-invalid='true'] { border-color: #D9736A; }
+
+.field-note { font-size: 13px; color: var(--on-dark-muted); }
+
+/* ---------- time slots ---------- */
+/* Chips rather than a dropdown: what is open, what is taken, and how little
+   is left on a busy day all read at a glance. */
+
+.slots { border: none; min-width: 0; }
+
+.slot-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(94px, 1fr));
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.slot {
+  padding: 11px 6px;
+  border: 1px solid var(--rule-dark);
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.045);
+  color: var(--on-dark);
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.slot:hover:not(:disabled) { border-color: var(--champagne); }
+
+.slot[aria-checked='true'] {
+  background: var(--pearl);
+  border-color: var(--pearl);
+  color: var(--on-light);
+}
+
+.slot:disabled { opacity: 0.3; cursor: not-allowed; text-decoration: line-through; }
+
+.slot-empty {
+  grid-column: 1 / -1;
+  font-size: 14px;
+  color: var(--on-dark-muted);
+  padding: 6px 0;
+}
+
+/* ---------- notice, summary, submit ---------- */
+
+.notice {
+  padding: 15px 18px;
+  border: 1px solid rgba(180, 111, 53, 0.45);
+  border-radius: 10px;
+  background: var(--ink-warm);
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--on-dark-muted);
+}
+.notice strong { color: var(--champagne); font-weight: 500; }
+
+.book-summary {
+  padding-top: clamp(12px, 1.4vw, 18px);
+  border-top: 1px solid var(--rule-dark);
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--on-dark-muted);
+}
+.book-summary b { color: var(--on-dark); font-weight: 500; }
+
+.book-submit {
+  justify-content: center;
+  width: 100%;
+  padding: 14px 18px;
+}
+.book-submit::after { display: none; }
+
+.book-fine { font-size: 13px; line-height: 1.55; color: var(--on-dark-muted); text-align: center; }
+.book-fine.is-error { color: #E39089; }
+.book-fine.is-done { color: var(--champagne); }
+
+/* ==========================================================================
    Newsletter
    ========================================================================== */
 
@@ -1096,6 +1289,7 @@ blockquote {
    ========================================================================== */
 
 @media (max-width: 1000px) {
+  .book-grid { grid-template-columns: 1fr; }
   .quote-split { grid-template-columns: 1fr; }
   .quote-art { min-height: 300px; }
   .footer-top { grid-template-columns: 1fr 1fr; }
@@ -1186,6 +1380,8 @@ blockquote {
 @media (max-width: 640px) {
   .section-head { align-items: flex-start; }
   .stage-notes { grid-template-columns: 1fr; gap: 22px; }
+  .field-row { grid-template-columns: 1fr; }
+  .slot-grid { grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); }
   .visit-cta { flex-direction: column; align-items: flex-start; }
 
   /* A ten-item menu of tall picture cards turns into a scroll marathon on a

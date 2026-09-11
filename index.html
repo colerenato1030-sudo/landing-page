@@ -44,6 +44,7 @@
     <li><a href="#treatments">Treatments</a></li>
     <li><a href="#studio">Studio</a></li>
     <li><a href="#visit">Visit</a></li>
+    <li><a href="#book">Book</a></li>
   </ul>
 
   <div class="nav-tools">
@@ -571,7 +572,144 @@
         <span aria-hidden="true">·</span>
         <a href="mailto:studio@barelygloss.com">studio@barelygloss.com</a>
       </p>
-      <a class="btn" href="mailto:studio@barelygloss.com">Request a time</a>
+      <a class="btn" href="#book">Book a chair</a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ BOOKING ============================ -->
+<section class="section section--dark" id="book">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Booking</p>
+        <h2>Reserve your<br><em>chair.</em></h2>
+      </div>
+      <p class="lede">
+        One chair, one technician, for as long as your service takes. Pick a
+        treatment and the studio's open hours will do the rest.
+      </p>
+    </div>
+
+    <div class="book-grid">
+      <aside class="book-aside">
+        <img class="book-shot" src="assets/treat-signature.webp"
+          alt="Almond nails in a sheer milky blush gel" loading="lazy" width="760" height="760">
+
+        <div class="book-card">
+          <h3>What to expect</h3>
+          <ul>
+            <li>Come with bare nails if you can — a soak-off adds 20 minutes and ₱350.</li>
+            <li>Your technician talks through shape and length before anything is filed.</li>
+            <li>Tools come out of a sealed pouch at your chair, not from a drawer.</li>
+            <li>Aftercare oil and a written card go home with you.</li>
+          </ul>
+        </div>
+
+        <div class="book-card book-card--warm">
+          <h3>If plans change</h3>
+          <p>
+            Move or cancel free up to 12 hours ahead. Inside that, half the fee
+            holds the chair. Message us either way — we would far rather
+            reschedule you than charge you.
+          </p>
+        </div>
+      </aside>
+
+      <form class="book-form" id="book-form" novalidate>
+        <div class="field">
+          <label for="bk-service">Treatment <span aria-hidden="true">*</span></label>
+          <select id="bk-service" name="service" required>
+            <option value="" selected disabled>Choose a treatment</option>
+            <optgroup label="Nails">
+              <option data-min="60" data-price="1,150">Signature Gel Manicure · 60 min · from ₱1,150</option>
+              <option data-min="90" data-price="1,950">Builder Gel Overlay · 90 min · from ₱1,950</option>
+              <option data-min="75" data-price="1,450">Russian Cuticle Work · 75 min · from ₱1,450</option>
+              <option data-min="30" data-price="450">Hand-Painted Art · 30 min · from ₱450</option>
+            </optgroup>
+            <optgroup label="Lashes">
+              <option data-min="120" data-price="2,600" data-patch="1">Classic Extensions · 120 min · from ₱2,600</option>
+              <option data-min="150" data-price="3,900" data-patch="1">Volume Set · 150 min · from ₱3,900</option>
+              <option data-min="60" data-price="1,550" data-patch="1">Lash Lift &amp; Tint · 60 min · from ₱1,550</option>
+            </optgroup>
+            <optgroup label="Spa">
+              <option data-min="45" data-price="1,250">Hand &amp; Arm Ritual · 45 min · from ₱1,250</option>
+              <option data-min="60" data-price="1,500">Foot &amp; Calf Ritual · 60 min · from ₱1,500</option>
+              <option data-min="30" data-price="700">Paraffin Treatment · 30 min · from ₱700</option>
+            </optgroup>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="bk-name">Name <span aria-hidden="true">*</span></label>
+          <input id="bk-name" name="name" type="text" autocomplete="name" placeholder="Your name" required>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="bk-email">Email <span aria-hidden="true">*</span></label>
+            <input id="bk-email" name="email" type="email" autocomplete="email" placeholder="you@email.com" required>
+          </div>
+          <div class="field">
+            <label for="bk-phone">Mobile <span aria-hidden="true">*</span></label>
+            <input id="bk-phone" name="phone" type="tel" autocomplete="tel" placeholder="0917 000 0000" required>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="bk-date">Date <span aria-hidden="true">*</span></label>
+          <input id="bk-date" name="date" type="date" required>
+          <p class="field-note" id="bk-day-note">Closed Mondays.</p>
+        </div>
+
+        <fieldset class="field slots" id="bk-slots-field">
+          <legend>Start time <span aria-hidden="true">*</span></legend>
+          <div class="slot-grid" id="bk-slots" role="radiogroup" aria-label="Available start times">
+            <p class="slot-empty">Choose a treatment and a date to see open times.</p>
+          </div>
+        </fieldset>
+
+        <div class="notice" id="bk-patch" hidden>
+          <strong>Patch test needed.</strong> First lash sets need one 48 hours
+          before the appointment. Pick a later date, or book the patch test and
+          we will hold this slot.
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="bk-occasion">Occasion <span class="opt">optional</span></label>
+            <select id="bk-occasion" name="occasion">
+              <option value="">Just because</option>
+              <option>Birthday</option>
+              <option>Debut</option>
+              <option>Wedding or entourage</option>
+              <option>Graduation</option>
+              <option>Anniversary</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="bk-first">Been before? <span class="opt">optional</span></label>
+            <select id="bk-first" name="first">
+              <option value="">Returning client</option>
+              <option>First visit</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="bk-notes">Anything we should know <span class="opt">optional</span></label>
+          <textarea id="bk-notes" name="notes" rows="3"
+            placeholder="Shape and length you want, allergies, inspiration photos you'll bring"></textarea>
+        </div>
+
+        <p class="book-summary" id="bk-summary">Nothing selected yet.</p>
+
+        <button class="btn book-submit" type="submit">Request this booking</button>
+
+        <p class="book-fine" id="bk-fine" role="status">
+          We reply by text within one working day to confirm. Nothing is charged now.
+        </p>
+      </form>
     </div>
   </div>
 </section>

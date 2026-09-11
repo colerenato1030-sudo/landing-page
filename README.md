@@ -69,3 +69,21 @@ photo, swap the div for an image and drop the attribute:
 
 `.finish-frame` already carries the aspect ratio, radius and `object-fit`,
 so nothing else changes. Removing `data-finish` drops the highlight overlay.
+
+## Booking
+
+`#book` is a real form, but there is no booking system behind it — submitting
+validates, assembles a summary and acknowledges. Wire the submit handler in
+`barely-gloss.js` to whatever takes bookings.
+
+Time slots are generated, not hard-coded. `HOURS` in `barely-gloss.js` is the
+single source for both the studio hours shown in `#visit` and the slots
+offered here, so the form can never offer a time the studio is shut. Slots
+step every 30 minutes from opening until the selected treatment's duration no
+longer fits before closing, which is why a 150-minute volume set stops being
+offered at 15:30 on a Saturday.
+
+Two rules ride along with it: a slot on the current day closes an hour before
+it starts, and a lash service booked inside 48 hours raises the patch-test
+notice. Duration, price and the patch-test flag all come from `data-` attributes
+on the `<option>`, so adding a treatment is a one-line change in the markup.

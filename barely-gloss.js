@@ -204,6 +204,165 @@
   statusEl.classList.toggle('is-open', status.open);
   hoursList.querySelector(`[data-day="${now.day}"]`)?.classList.add('is-today');
 
+  /* ---------- booking ---------- */
+  // Reuses HOURS, DAYS and clock() above: the form offers exactly the times
+  // the studio is actually open, so the two can never drift apart.
+
+  const bookForm = document.getElementById('book-form');
+  const bkService = document.getElementById('bk-service');
+  const bkDate = document.getElementById('bk-date');
+  const bkSlots = document.getElementById('bk-slots');
+  const bkDayNote = document.getElementById('bk-day-note');
+  const bkPatch = document.getElementById('bk-patch');
+  const bkSummary = document.getElementById('bk-summary');
+  const bkFine = document.getElementById('bk-fine');
+  let chosenSlot = null;
+
+  const isoToday = () =>
+    new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Manila' }).format(new Date());
+  // midday avoids the parsed date sliding a day either way across timezones
+  const asDate = (iso) => new Date(`${iso}T12:00:00`);
+  const hhmm = (m) => {
+    const h = Math.floor(m / 60);
+    return `${((h + 11) % 12) + 1}:${String(m % 60).padStart(2, '0')}${h < 12 ? 'am' : 'pm'}`;
+  };
+
+  bkDate.min = isoToday();
+
+  function fillSummary() {
+    bkSummary.textContent = '';
+    const opt = bkService.selectedOptions[0];
+    if (!opt || !opt.dataset.min) {
+      bkSummary.textContent = 'Nothing selected yet.';
+      return;
+    }
+    const parts = [['b', opt.textContent.split(' · ')[0]]];
+    if (bkDate.value) {
+      parts.push(['span', asDate(bkDate.value).toLocaleDateString('en-PH',
+        { weekday: 'short', day: 'numeric', month: 'short' })]);
+    }
+    if (chosenSlot) parts.push(['b', chosenSlot.textContent]);
+    parts.push(['span', `${opt.dataset.min} min`], ['span', `from ₱${opt.dataset.price}`]);
+
+    parts.forEach(([tag, text], i) => {
+      if (i) bkSummary.append(' · ');
+      const el = document.createElement(tag);
+      el.textContent = text;
+      bkSummary.append(el);
+    });
+  }
+
+  function checkPatchTest() {
+    const opt = bkService.selectedOptions[0];
+    if (!opt?.dataset.patch || !bkDate.value) {
+      bkPatch.hidden = true;
+      return;
+    }
+    const days = Math.round((asDate(bkDate.value) - asDate(isoToday())) / 86400000);
+    bkPatch.hidden = days >= 2;
+  }
+
+  function renderSlots() {
+    const opt = bkService.selectedOptions[0];
+    const duration = Number(opt?.dataset.min || 0);
+    chosenSlot = null;
+    bkSlots.textContent = '';
+
+    const say = (message) => {
+      const p = document.createElement('p');
+      p.className = 'slot-empty';
+      p.textContent = message;
+      bkSlots.append(p);
+    };
+
+    if (!duration || !bkDate.value) {
+      say('Choose a treatment and a date to see open times.');
+      fillSummary();
+      return;
+    }
+
+    const day = asDate(bkDate.value).getDay();
+    const hours = HOURS[day];
+    bkDayNote.textContent = hours
+      ? `Open ${clock(hours[0])} – ${clock(hours[1])} on ${DAYS[day]}s.`
+      : `The studio is closed on ${DAYS[day]}s.`;
+
+    if (!hours) {
+      say('Closed that day — try another date.');
+      fillSummary();
+      return;
+    }
+
+    const close = hours[1] * 60;
+    const today = bkDate.value === isoToday();
+    const nowMinutes = studioNow().minutes;
+    let bookable = 0;
+
+    for (let start = hours[0] * 60; start + duration <= close; start += 30) {
+      const slot = document.createElement('button');
+      slot.type = 'button';
+      slot.className = 'slot';
+      slot.setAttribute('role', 'radio');
+      slot.setAttribute('aria-checked', 'false');
+      slot.textContent = hhmm(start);
+      // an hour's notice on the day itself, so nobody books a slot already gone
+      if (today && start <= nowMinutes + 60) slot.disabled = true;
+      else bookable++;
+      bkSlots.append(slot);
+    }
+
+    if (!bkSlots.children.length) {
+      say('That treatment needs more time than this day has left. Try another date.');
+    } else if (!bookable) {
+      bkSlots.prepend(Object.assign(document.createElement('p'),
+        { className: 'slot-empty', textContent: 'Nothing left today — try tomorrow.' }));
+    }
+    fillSummary();
+  }
+
+  bkSlots.addEventListener('click', (e) => {
+    const slot = e.target.closest('.slot');
+    if (!slot || slot.disabled) return;
+    bkSlots.querySelectorAll('.slot').forEach((s) =>
+      s.setAttribute('aria-checked', String(s === slot)));
+    chosenSlot = slot;
+    fillSummary();
+  });
+
+  bkService.addEventListener('change', () => { renderSlots(); checkPatchTest(); });
+  bkDate.addEventListener('change', () => { renderSlots(); checkPatchTest(); });
+
+  bookForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const required = [bkService, document.getElementById('bk-name'),
+      document.getElementById('bk-email'), document.getElementById('bk-phone'), bkDate];
+
+    let firstBad = null;
+    required.forEach((el) => {
+      const ok = el.value.trim() !== '' && el.checkValidity();
+      el.setAttribute('aria-invalid', String(!ok));
+      if (!ok && !firstBad) firstBad = el;
+    });
+
+    if (firstBad) {
+      bkFine.className = 'book-fine is-error';
+      bkFine.textContent = 'A starred field is still empty or not quite right.';
+      firstBad.focus();
+      return;
+    }
+    if (!chosenSlot) {
+      bkFine.className = 'book-fine is-error';
+      bkFine.textContent = 'Pick a start time to finish the request.';
+      return;
+    }
+
+    // No booking system is wired up yet; this acknowledges and stops there.
+    bkFine.className = 'book-fine is-done';
+    bkFine.textContent = 'Request sent. We will text you within one working day to confirm — nothing is charged now.';
+  });
+
+  renderSlots();
+
   /* ---------- nav reflects the section in view ---------- */
 
   const links = [...panel.querySelectorAll('a')];
