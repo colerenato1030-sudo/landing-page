@@ -581,67 +581,6 @@ h2 em { font-style: italic; }
   color: var(--on-light-muted);
 }
 
-/* ---------- finishes ---------- */
-/* A band of the treatment section rather than a section of its own: these
-   are surfaces you can order on any of the nail services above, so they
-   belong to that menu rather than standing beside it. */
-
-.finishes {
-  margin-top: clamp(48px, 6vw, 84px);
-  padding-top: clamp(34px, 4vw, 52px);
-  border-top: 1px solid var(--rule-light);
-}
-
-.finishes-title {
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: clamp(26px, 3.2vw, 42px);
-  line-height: 1.08;
-  letter-spacing: -0.012em;
-  margin-top: 14px;
-  text-wrap: balance;
-}
-.finishes-title em { font-style: italic; }
-
-.finish-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(168px, 1fr));
-  gap: clamp(14px, 1.8vw, 26px);
-  list-style: none;
-}
-
-.finish { display: flex; flex-direction: column; gap: 12px; }
-
-.finish-frame {
-  aspect-ratio: 3 / 4;
-  width: 100%;
-  border-radius: 14px;
-  object-fit: cover;
-  overflow: hidden;
-  position: relative;
-  background: var(--pearl-sunk);
-}
-
-/* Until the photography lands each frame stands as a lacquer chip: the
-   finish's own colour under a raking highlight. Swapping the div for an
-   <img class="finish-frame"> replaces it with no other change. */
-.finish-frame[data-finish]::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(115deg,
-    transparent 28%, rgba(255,255,255,0.5) 43%,
-    rgba(255,255,255,0.14) 52%, transparent 64%);
-}
-
-.finish-frame[data-finish='blossom'] { background: linear-gradient(160deg, #F3E4DE 0%, #E4CCC3 46%, #D2B3A9 100%); }
-.finish-frame[data-finish='mauve']   { background: linear-gradient(160deg, #C6ACA9 0%, #AA8E8C 50%, #8C7270 100%); }
-.finish-frame[data-finish='milk']    { background: linear-gradient(160deg, #F8E1E1 0%, #EECACC 50%, #E0B2B6 100%); }
-.finish-frame[data-finish='blush']   { background: linear-gradient(160deg, #FBEEEA 0%, #F3DED9 50%, #E9CDC8 100%); }
-
-.finish h4 { font-size: 16px; font-weight: 500; }
-.finish p { font-size: 14px; line-height: 1.55; color: var(--on-light-muted); }
-
 /* ==========================================================================
    Disciplines
    ========================================================================== */
