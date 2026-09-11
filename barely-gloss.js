@@ -195,14 +195,15 @@
     return { open: false, text: 'Closed' };
   }
 
-  const statusEl = document.getElementById('visit-status');
+  const statusEl = document.getElementById('studio-status');
   const hoursList = document.getElementById('hours-list');
   const now = studioNow();
   const status = currentStatus(now);
 
-  document.getElementById('visit-status-text').textContent = status.text;
+  document.getElementById('studio-status-text').textContent = status.text;
   statusEl.classList.toggle('is-open', status.open);
-  hoursList.querySelector(`[data-day="${now.day}"]`)?.classList.add('is-today');
+  // Rows cover a span of days, so match a member of the list rather than one day.
+  hoursList.querySelector(`[data-days~="${now.day}"]`)?.classList.add('is-today');
 
   /* ---------- booking ---------- */
   // Reuses HOURS, DAYS and clock() above: the form offers exactly the times

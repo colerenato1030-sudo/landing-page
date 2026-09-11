@@ -43,7 +43,6 @@
     <li><a href="#top" aria-current="page">Home</a></li>
     <li><a href="#treatments">Treatments</a></li>
     <li><a href="#studio">Studio</a></li>
-    <li><a href="#visit">Visit</a></li>
     <li><a href="#book">Book</a></li>
   </ul>
 
@@ -323,7 +322,7 @@
       <img src="assets/hero-hands.jpg" alt="">
       <p class="eyebrow">In the chair</p>
       <h2>Shaped by hand.<br><em>Finished with patience.</em></h2>
-      <a class="btn" href="#visit">Book an appointment</a>
+      <a class="btn" href="#book">Book an appointment</a>
 
       <p class="tab-body" id="tab-body">
         Every file, buffer and wooden stick is single-use. Metal tools are
@@ -486,65 +485,6 @@
   </div>
 </section>
 
-<!-- ============================ VISIT ============================ -->
-<section class="section section--light" id="visit">
-  <div class="wrap">
-    <div class="section-head">
-      <div>
-        <p class="eyebrow">Visit</p>
-        <h2>Come and sit<br><em>for an hour.</em></h2>
-      </div>
-      <p class="visit-status" id="visit-status" role="status">
-        <span class="dot" aria-hidden="true"></span>
-        <span id="visit-status-text">Studio hours below</span>
-      </p>
-    </div>
-
-    <div class="visit-cols">
-      <div class="visit-col">
-        <h3>Hours</h3>
-        <ul class="hours-list" id="hours-list">
-          <li data-day="1"><span>Monday</span><span>Closed</span></li>
-          <li data-day="2"><span>Tuesday</span><span>10:00 – 19:00</span></li>
-          <li data-day="3"><span>Wednesday</span><span>10:00 – 19:00</span></li>
-          <li data-day="4"><span>Thursday</span><span>10:00 – 20:00</span></li>
-          <li data-day="5"><span>Friday</span><span>10:00 – 20:00</span></li>
-          <li data-day="6"><span>Saturday</span><span>09:00 – 18:00</span></li>
-          <li data-day="0"><span>Sunday</span><span>11:00 – 17:00</span></li>
-        </ul>
-      </div>
-
-      <div class="visit-col">
-        <h3>Where</h3>
-        <address>
-          Purok 3, Buru-un<br>
-          Along Linamon–Zamboanga Rd<br>
-          Iligan City
-        </address>
-        <p>Beside 7-Eleven Buru-un — look for the Barely Gloss signage right on the highway. Roadside parking out front.</p>
-      </div>
-
-      <div class="visit-col">
-        <h3>Before you come</h3>
-        <ul class="visit-notes">
-          <li>New lash sets need a patch test 48 hours ahead.</li>
-          <li>Soak-offs are walk-in on weekday mornings.</li>
-          <li>Cancellations inside 12 hours hold half the fee.</li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="visit-cta">
-      <p>
-        <a href="tel:+639175550148">+63 917 555 0148</a>
-        <span aria-hidden="true">·</span>
-        <a href="mailto:studio@barelygloss.com">studio@barelygloss.com</a>
-      </p>
-      <a class="btn" href="#book">Book a chair</a>
-    </div>
-  </div>
-</section>
-
 <!-- ============================ BOOKING ============================ -->
 <section class="section section--dark" id="book">
   <div class="wrap">
@@ -564,23 +504,41 @@
         <img class="book-shot" src="assets/treat-signature.webp"
           alt="Almond nails in a sheer milky blush gel" loading="lazy" width="760" height="760">
 
-        <div class="book-card">
-          <h3>What to expect</h3>
-          <ul>
-            <li>Come with bare nails if you can — a soak-off adds 20 minutes and ₱350.</li>
-            <li>Your technician talks through shape and length before anything is filed.</li>
-            <li>Tools come out of a sealed pouch at your chair, not from a drawer.</li>
-            <li>Aftercare oil and a written card go home with you.</li>
+        <div class="book-card book-studio">
+          <div class="studio-head">
+            <h3>The studio</h3>
+            <p class="studio-status" id="studio-status" role="status">
+              <span class="dot" aria-hidden="true"></span>
+              <span id="studio-status-text">Hours below</span>
+            </p>
+          </div>
+
+          <ul class="hours-list" id="hours-list">
+            <li data-days="2 3"><span>Tue – Wed</span><span>10:00 – 19:00</span></li>
+            <li data-days="4 5"><span>Thu – Fri</span><span>10:00 – 20:00</span></li>
+            <li data-days="6"><span>Saturday</span><span>09:00 – 18:00</span></li>
+            <li data-days="0"><span>Sunday</span><span>11:00 – 17:00</span></li>
+            <li data-days="1"><span>Monday</span><span>Closed</span></li>
           </ul>
+
+          <address>
+            Purok 3, Buru-un · Iligan City<br>
+            Along Linamon–Zamboanga Rd, beside 7-Eleven
+          </address>
+
+          <p class="studio-contact">
+            <a href="tel:+639175550148">+63 917 555 0148</a>
+            <a href="mailto:studio@barelygloss.com">studio@barelygloss.com</a>
+          </p>
         </div>
 
         <div class="book-card book-card--warm">
-          <h3>If plans change</h3>
-          <p>
-            Move or cancel free up to 12 hours ahead. Inside that, half the fee
-            holds the chair. Message us either way — we would far rather
-            reschedule you than charge you.
-          </p>
+          <h3>Before you come</h3>
+          <ul>
+            <li>New lash sets need a patch test 48 hours ahead.</li>
+            <li>Bare nails if you can — a soak-off adds 20 minutes and ₱350.</li>
+            <li>Move or cancel free up to 12 hours ahead; half the fee holds it after.</li>
+          </ul>
         </div>
       </aside>
 
@@ -717,7 +675,7 @@
         <ul>
           <li><a href="#studio">Our disciplines</a></li>
           <li><a href="#treatments">Treatment menu</a></li>
-          <li><a href="#visit">Opening hours</a></li>
+          <li><a href="#book">Opening hours</a></li>
           <li><a href="#top">Gift cards</a></li>
         </ul>
       </div>
@@ -725,9 +683,9 @@
       <div>
         <h4>Booking</h4>
         <ul>
-          <li><a href="#visit">Request a time</a></li>
-          <li><a href="#visit">Patch test policy</a></li>
-          <li><a href="#visit">Cancellations</a></li>
+          <li><a href="#book">Request a time</a></li>
+          <li><a href="#book">Patch test policy</a></li>
+          <li><a href="#book">Cancellations</a></li>
           <li><a href="#treatments">Aftercare</a></li>
         </ul>
       </div>

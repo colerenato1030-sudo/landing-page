@@ -881,48 +881,45 @@ blockquote {
 }
 
 /* ==========================================================================
-   Visit
+   Studio card
+   Hours, address and live open state, folded into the booking aside so the
+   answers sit beside the form rather than a section away from it. Days are
+   grouped by shared hours — five rows instead of seven.
    ========================================================================== */
 
-.visit-status {
+.studio-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 14px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.studio-head h3 { margin-bottom: 0; }
+
+.studio-status {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  padding: 10px 20px;
-  border: 1px solid var(--rule-light);
+  gap: 8px;
+  padding: 6px 14px;
+  border: 1px solid var(--rule-dark);
   border-radius: 999px;
-  font-size: 14px;
-  color: var(--on-light-muted);
+  font-size: 13px;
+  color: var(--on-dark-muted);
 }
 
 /* Semantic, and deliberately not the champagne accent: this reports state
    rather than inviting a click. */
-.visit-status .dot {
-  width: 8px;
-  height: 8px;
+.studio-status .dot {
+  width: 7px;
+  height: 7px;
   flex: none;
   border-radius: 50%;
-  background: var(--on-light-muted);
+  background: var(--on-dark-muted);
 }
-.visit-status.is-open { color: var(--on-light); }
-.visit-status.is-open .dot { background: #3F7A56; }
-
-.visit-cols {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: clamp(26px, 4vw, 64px);
-}
-
-.visit-col h3 {
-  margin-bottom: 4px;
-  padding-bottom: 14px;
-  border-bottom: 1px solid var(--rule-light);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--on-light-muted);
-}
+.studio-status.is-open { color: var(--on-dark); }
+.studio-status.is-open .dot { background: #6FBF8E; }
 
 .hours-list { list-style: none; }
 
@@ -930,68 +927,44 @@ blockquote {
   display: flex;
   justify-content: space-between;
   gap: 16px;
-  padding: 11px 0;
+  padding: 8px 0;
   font-size: 14px;
-  color: var(--on-light-muted);
+  color: var(--on-dark-muted);
   font-variant-numeric: tabular-nums;
 }
 
 .hours-list li.is-today {
-  margin-inline: -14px;
-  padding-inline: 14px;
+  margin-inline: -12px;
+  padding-inline: 12px;
   border-radius: 8px;
-  background: var(--pearl-sunk);
-  color: var(--on-light);
+  background: rgba(255, 255, 255, 0.07);
+  color: var(--on-dark);
 }
 
-.visit-col address {
-  padding-top: 14px;
+.book-studio address {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--rule-dark);
   font-style: normal;
-  font-size: 15px;
-  line-height: 1.6;
-}
-
-.visit-col > p {
-  margin-top: 14px;
   font-size: 14px;
   line-height: 1.6;
-  color: var(--on-light-muted);
+  color: var(--on-dark-muted);
 }
 
-.visit-notes { list-style: none; padding-top: 14px; display: grid; gap: 13px; }
-
-.visit-notes li {
-  position: relative;
-  padding-left: 20px;
-  font-size: 14px;
-  line-height: 1.55;
-  color: var(--on-light-muted);
-}
-
-.visit-notes li::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0.5em;
-  width: 7px;
-  height: 7px;
-  border-radius: 50%;
-  background: var(--copper);
-}
-
-.visit-cta {
+.studio-contact {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
   flex-wrap: wrap;
-  margin-top: clamp(30px, 4vw, 50px);
-  padding-top: clamp(24px, 3vw, 34px);
-  border-top: 1px solid var(--rule-light);
+  gap: 2px 16px;
+  margin-top: 10px;
 }
 
-.visit-cta p { display: flex; gap: 12px; flex-wrap: wrap; font-size: 15px; }
-.visit-cta p a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+.studio-contact a {
+  color: var(--on-dark);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: var(--rule-dark);
+}
+.studio-contact a:hover { text-decoration-color: currentColor; }
 
 /* ==========================================================================
    Booking
@@ -1021,9 +994,10 @@ blockquote {
 
 .book-card h3 { font-size: 16px; font-weight: 500; margin-bottom: 14px; }
 .book-card p { font-size: 14px; line-height: 1.6; color: var(--on-dark-muted); }
-.book-card ul { list-style: none; display: grid; gap: 11px; }
+/* The hours list is a two-column table, not a bulleted note — it opts out. */
+.book-card ul:not(.hours-list) { list-style: none; display: grid; gap: 11px; }
 
-.book-card li {
+.book-card ul:not(.hours-list) li {
   position: relative;
   padding-left: 20px;
   font-size: 14px;
@@ -1031,7 +1005,7 @@ blockquote {
   color: var(--on-dark-muted);
 }
 
-.book-card li::before {
+.book-card ul:not(.hours-list) li::before {
   content: '';
   position: absolute;
   left: 0;
@@ -1404,7 +1378,6 @@ blockquote {
   .stage-notes { grid-template-columns: 1fr; gap: 22px; }
   .field-row { grid-template-columns: 1fr; }
   .slot-grid { grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); }
-  .visit-cta { flex-direction: column; align-items: flex-start; }
 
   /* Two to a row rather than one: ten full-width tiles would be a scroll
      marathon, and the pair still leaves the photograph readable. */
