@@ -517,62 +517,126 @@ h2 em { font-style: italic; }
   gap: clamp(14px, 1.6vw, 22px);
 }
 
+/* Image-first tiles: the photograph fills the card and everything else
+   floats over it on glass, so a card costs one block of height instead of
+   a picture stacked on a caption. */
 .treatment {
-  display: flex;
-  flex-direction: column;
-  background: var(--pearl-sunk);
-  border-radius: var(--radius);
-  overflow: hidden;
-  transition: transform 0.25s;
-}
-.treatment:hover { transform: translateY(-3px); }
-
-/* Square rather than landscape: the studio photography is shot down the
-   hand, so a wide crop would cut the nails it exists to show. */
-.treatment-art {
-  aspect-ratio: 1 / 1;
-  display: grid;
-  place-items: center;
+  position: relative;
+  isolation: isolate;
+  aspect-ratio: 4 / 5;
+  border-radius: 20px;
   overflow: hidden;
   background: linear-gradient(150deg, #EFE9E2 0%, #DCD3C8 100%);
+  transition: transform 0.3s, box-shadow 0.3s;
 }
-.treatment-art svg { width: 52%; height: auto; }
-.treatment-art img { width: 100%; height: 100%; object-fit: cover; }
 
-.treatment-body {
+.treatment:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(22, 19, 15, 0.18);
+}
+
+.treatment-art {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: grid;
+  place-items: center;
+}
+
+.treatment-art img { width: 100%; height: 100%; object-fit: cover; }
+.treatment-art svg { width: 44%; height: auto; color: var(--copper); }
+
+/* The photography is pale and the motif ground paler still, so the panel
+   needs a gradient under it on both. */
+.treatment::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(to top,
+    rgba(5, 5, 6, 0.62) 0%, rgba(5, 5, 6, 0.24) 34%, transparent 58%);
+}
+
+/* Cards with no photograph stand on a warm dark ground of their own rather
+   than wearing a scrim built for a pale photo, which only muddied them. */
+.treatment--drawn { background: linear-gradient(158deg, #2A211A 0%, #12100E 100%); }
+.treatment--drawn .treatment-art svg { color: var(--champagne); }
+.treatment--drawn::after {
+  background: linear-gradient(to top, rgba(5, 5, 6, 0.4) 0%, transparent 46%);
+}
+
+.treatment-flag {
+  position: absolute;
+  z-index: 2;
+  top: 13px;
+  left: 13px;
+  padding: 6px 13px;
+  border-radius: 999px;
+  border: 1px solid var(--glass-edge);
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--on-dark);
+}
+
+/* Promotional versus practical: "most booked" invites, "patch test" warns. */
+.treatment-flag--hot { color: var(--champagne); border-color: rgba(240, 196, 137, 0.45); }
+
+.treatment-panel {
+  position: absolute;
+  z-index: 2;
+  inset: auto 11px 11px;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  gap: 14px;
-  padding: 18px 20px 20px;
+  gap: 12px;
+  padding: 14px 14px 15px;
+  border-radius: 14px;
+  border: 1px solid var(--glass-edge);
+  background: var(--glass);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  color: var(--on-dark);
 }
+
+.treatment-lines { min-width: 0; }
 
 .treatment-kind {
-  font-size: 12px;
-  letter-spacing: 0.1em;
+  font-size: 11px;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--on-light-muted);
+  color: var(--on-dark-muted);
 }
-.treatment-name { font-size: 17px; margin: 6px 0 8px; }
-.treatment-meta {
-  font-size: 14px;
-  color: var(--on-light-muted);
-  font-variant-numeric: tabular-nums;
+
+.treatment-name {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.24;
+  margin: 5px 0 7px;
+  text-wrap: balance;
 }
-.treatment-meta b { color: var(--on-light); font-weight: 500; }
+
+.treatment-meta { font-size: 13px; color: var(--on-dark-muted); font-variant-numeric: tabular-nums; }
+.treatment-meta b { color: var(--on-dark); font-weight: 500; }
 
 .book {
-  width: 40px; height: 40px; flex: none;
-  border-radius: 50%;
+  width: 38px;
+  height: 38px;
+  flex: none;
   border: none;
-  background: var(--ink);
-  color: var(--pearl);
+  border-radius: 50%;
+  background: var(--pearl);
+  color: var(--on-light);
   display: grid;
   place-items: center;
   cursor: pointer;
-  transition: background-color 0.25s;
+  transition: background-color 0.25s, transform 0.25s;
 }
-.book:hover { background: var(--copper); }
+
+.book:hover { background: var(--champagne); transform: scale(1.07); }
 .book svg { width: 16px; height: 16px; }
 
 .menu-empty {
@@ -1342,14 +1406,25 @@ blockquote {
   .slot-grid { grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); }
   .visit-cta { flex-direction: column; align-items: flex-start; }
 
-  /* A ten-item menu of tall picture cards turns into a scroll marathon on a
-     phone, so each treatment collapses to a single readable row. */
-  .treatment { flex-direction: row; }
-  .treatment:hover { transform: none; }
-  .treatment-art { aspect-ratio: 1; width: 94px; flex: none; }
-  .treatment-art svg { width: 50%; }
-  .treatment-body { flex: 1; align-items: center; padding: 14px 16px; }
-  .treatment-name { font-size: 16px; margin: 5px 0 6px; }
+  /* Two to a row rather than one: ten full-width tiles would be a scroll
+     marathon, and the pair still leaves the photograph readable. */
+  .menu-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+  .treatment { border-radius: 16px; }
+  .treatment:hover { transform: none; box-shadow: none; }
+  .treatment-panel { inset: auto 8px 8px; padding: 11px 11px 12px; gap: 8px; border-radius: 11px; }
+  .treatment-kind { font-size: 10px; letter-spacing: 0.1em; }
+  .treatment-name { font-size: 13px; margin: 4px 0 5px; }
+  /* "from" is the first thing to go when the line will not fit beside the
+     button; the price still reads as a starting price in context. */
+  .meta-from { display: none; }
+  .treatment-meta { font-size: 10px; }
+  .treatment-panel { gap: 6px; }
+  .treatment-flag { top: 9px; left: 9px; padding: 5px 10px; font-size: 10px; }
+  /* the card is shorter here, so the centred motif would sit under the panel */
+  .treatment--drawn .treatment-art { padding-bottom: 32%; }
+  .treatment-art svg { width: 38%; }
+  .book { width: 28px; height: 28px; }
+  .book svg { width: 13px; height: 13px; }
 
   .filter { padding: 9px 15px; font-size: 13px; }
   .footer-top { grid-template-columns: 1fr; }
