@@ -1,71 +1,75 @@
-# AceTennis — landing page
+# Barely Gloss
 
-A static landing page. No build step: open `index.html`, or serve the folder.
+Static site for a nail, lash and spa studio. No build step for the site
+itself — open `index.html`, or serve the folder:
 
 ```bash
 python3 -m http.server 8000
 ```
 
+| File | Role |
+| --- | --- |
+| `index.html` | The page |
+| `barely-gloss.css` | Design system and all section styles |
+| `barely-gloss.js` | Menu panel, treatment filters, banner tabs, quote carousel |
+| `build_preview.py` | Folds the above into a single `preview.html` for publishing |
+| `acetennis.html` + `styles.css` + `script.js` | Unrelated earlier page, kept intact |
+
 ## The hero
 
-The hero is built as three stacked layers inside one CSS grid cell, so the
-display type sits **behind** the players and the figures interrupt the
-letterforms:
+The photograph ships as two layers so the wordmark sits *inside* the image
+rather than on top of it:
 
-| z-index | Layer | Element |
-| --- | --- | --- |
-| 0 | Sky + clouds | `.hero__sky` |
-| 1 | Display type | `.stage__type` |
-| 2 | Cut-out subject | `.stage__subject` |
-| 3 | Caption card | `.stage__caption` |
-| 4 | Navigation | `.nav` |
+| z-index | Layer |
+| --- | --- |
+| -3 | Full photograph + scrim (`.hero::before`) |
+| -2 | Cool/warm rim light, screen-blended (`.hero::after`) |
+| 0 | `.wordmark` |
+| 1 | Alpha cutout of hands and silk (`.cutout`) |
 
-`.stage` uses a single named grid area (`stack`) that every layer is assigned
-to, so they overlap without absolute positioning and the hero still grows with
-its content.
+Both image layers share `--frame-size` / `--frame-pos` because they must stay
+registered to each other; changing one alone will visibly split the hands from
+their background. The cutout re-applies the same `--scrim` through its own
+alpha so the hands are graded like the frame they came from.
 
-### Headline fitting
+`assets/hero-hands-cut.webp` was derived from `assets/hero-hands-source.png` by
+thresholding the subject away from the near-black ground, keeping the largest
+connected component and feathering the edge.
 
-`script.js` measures the headline at a fixed 200px, then sets an exact pixel
-size so the line spans the stage edge to edge. This runs on load, on
-`document.fonts.ready`, and via a `ResizeObserver` — so the type always fits
-whether or not the webfont loads, and every carousel headline gets sized to the
-same width regardless of its length. The CSS `clamp()` is only the pre-JS
-fallback.
+## Imagery
 
-Note that `.stage` sets `grid-template-columns: minmax(0, 1fr)` and its children
-set `min-width: 0`. Without those, the `white-space: nowrap` heading widens its
-own grid track, and the measurement chases itself.
+Studio photography exists for the four nail treatments only (`treat-*.webp`,
+cropped square from the masters in `assets/source/`). Everything else is a
+crop of the hero photograph: `card-nails`, `card-lashes`, `card-spa` and
+`quote`.
 
-## Swapping in the real hero image
+The lash and spa treatment cards therefore still carry drawn motifs, which
+is why the menu grid mixes photographs and line art. Shooting those six
+services is what closes the gap; the swap is `<div class="treatment-art">`
+contents only, nothing else changes.
 
-`assets/hero-players.svg` is a **placeholder silhouette**. Replace it with the
-cut-out of the two players:
+## Publishing
 
-1. Cut the subjects out of the source photo and export with a **transparent
-   background** — the sky gradient behind them is drawn in CSS, not baked into
-   the file.
-2. Crop tight to the figures horizontally, and leave generous empty space above
-   their heads so the display type reads through behind them. The placeholder's
-   `viewBox` (`300 40 800 1170`, roughly a 1:1.46 portrait) is a good target.
-3. Save as `assets/hero-players.png` (or `.webp`) and update the `src` on
-   `img.stage__subject` in `index.html`, along with its `width`/`height`.
+`preview.html` is generated, gitignored, and should never be hand-edited:
 
-Nothing else needs to change — `object-fit: contain` with
-`object-position: bottom center` keeps the figures standing on the bottom edge
-at every breakpoint.
-
-## Files
-
-```
-index.html   markup
-styles.css   all styles, tokens at :root
-script.js    hero carousel, headline fitting, mobile nav
-assets/      hero subject placeholder + favicon
+```bash
+python3 build_preview.py
 ```
 
-## Type
+## Booking
 
-`Anton` for display, `Inter` for text, both from Google Fonts, with
-`Archivo Black` / `Impact` as metric-ish fallbacks for the compressed display
-face.
+`#book` is a real form, but there is no booking system behind it — submitting
+validates, assembles a summary and acknowledges. Wire the submit handler in
+`barely-gloss.js` to whatever takes bookings.
+
+Time slots are generated, not hard-coded. `HOURS` in `barely-gloss.js` is the
+single source for both the hours listed in the studio card beside the form and
+the slots offered in it, so the form can never offer a time the studio is shut. Slots
+step every 30 minutes from opening until the selected treatment's duration no
+longer fits before closing, which is why a 150-minute volume set stops being
+offered at 15:30 on a Saturday.
+
+Two rules ride along with it: a slot on the current day closes an hour before
+it starts, and a lash service booked inside 48 hours raises the patch-test
+notice. Duration, price and the patch-test flag all come from `data-` attributes
+on the `<option>`, so adding a treatment is a one-line change in the markup.

@@ -3,228 +3,710 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AceTennis — Building Champions On and Off the Court</title>
-<meta name="description" content="AceTennis is a year-round academy for players who want to train smarter, play stronger and compete further. Coaching, programs and tournaments for every level.">
+<title>Barely Gloss — Nail, Lash &amp; Spa Studio</title>
+<meta name="description" content="An Iligan City studio for nail artistry, lash work and hand &amp; foot spa treatments. Hand-filed shaping, single-use tools and sets that hold for four weeks.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600;1,700&display=swap">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="barely-gloss.css">
 </head>
 <body>
 
 <a class="skip" href="#main">Skip to content</a>
 
-<!-- ============================ HERO ============================ -->
-<header class="hero" id="top">
+<svg width="0" height="0" aria-hidden="true" style="position:absolute">
+  <defs>
+    <symbol id="motif-lash" viewBox="0 0 140 100">
+      <path d="M10 66c20-30 40-45 60-45s40 15 60 45" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <path d="M22 58 6 40M42 38 33 16M70 29V6M98 38l9-22M118 58l16-18" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+      <path d="M46 66a24 24 0 0 1 48 0" fill="none" stroke="currentColor" stroke-width="3" opacity=".45"/>
+    </symbol>
+    <symbol id="motif-spa" viewBox="0 0 120 120">
+      <path d="M60 14c14 18 24 32 24 46a24 24 0 0 1-48 0c0-14 10-28 24-46Z" fill="none" stroke="currentColor" stroke-width="3"/>
+      <path d="M20 92c12 8 26 12 40 12s28-4 40-12M14 108c14 6 30 9 46 9s32-3 46-9" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" opacity=".45"/>
+    </symbol>
 
-  <!-- layer 1 — sky -->
-  <div class="hero__sky" aria-hidden="true">
-    <svg class="hero__clouds" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" role="presentation">
-      <defs>
-        <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
-          <feGaussianBlur stdDeviation="26"/>
-        </filter>
-        <filter id="softer" x="-30%" y="-30%" width="160%" height="160%">
-          <feGaussianBlur stdDeviation="48"/>
-        </filter>
-      </defs>
-      <g fill="#ffffff" filter="url(#softer)" opacity=".55">
-        <ellipse cx="230" cy="700" rx="360" ry="150"/>
-        <ellipse cx="1380" cy="760" rx="420" ry="170"/>
-        <ellipse cx="820" cy="840" rx="520" ry="180"/>
-      </g>
-      <g fill="#ffffff" filter="url(#soft)" opacity=".7">
-        <ellipse cx="330" cy="180" rx="210" ry="72"/>
-        <ellipse cx="470" cy="150" rx="150" ry="58"/>
-        <ellipse cx="1240" cy="240" rx="240" ry="80"/>
-        <ellipse cx="1080" cy="215" rx="140" ry="54"/>
-        <ellipse cx="760" cy="620" rx="300" ry="96"/>
-      </g>
-    </svg>
-  </div>
+    <!-- Polish coverage for the wear timeline: the rect top is the cuticle
+         line, so a lower top edge reads as more regrowth. -->
+    <clipPath id="wear-1"><rect x="0" y="8" width="100" height="140"/></clipPath>
+    <clipPath id="wear-2"><rect x="0" y="26" width="100" height="140"/></clipPath>
+    <clipPath id="wear-3"><rect x="0" y="40" width="100" height="140"/></clipPath>
+    <clipPath id="wear-4"><rect x="0" y="56" width="100" height="140"/></clipPath>
+  </defs>
+</svg>
 
-  <!-- layer 2 — navigation -->
-  <nav class="nav" aria-label="Primary">
-    <a class="nav__brand" href="#top">
-      <span class="nav__mark" aria-hidden="true">
-        <svg viewBox="0 0 32 32"><path d="M16 3 6 29h5.1l2-5.6h9.2l2 5.6H29L19 3h-3Zm-1.2 15.6L17.5 11l2.7 7.6h-5.4Z"/><circle cx="26" cy="7" r="3"/></svg>
-      </span>
-      <span class="nav__word">Ace<em>Tennis</em></span>
-    </a>
+<header class="header" id="header">
+  <a class="brand" href="#top">Barely Gloss</a>
 
-    <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-menu">
-      <span class="nav__bars" aria-hidden="true"></span>
-      <span class="sr-only">Menu</span>
+  <ul class="nav-links" id="site-nav">
+    <li><a href="#top" aria-current="page">Home</a></li>
+    <li><a href="#treatments">Treatments</a></li>
+    <li><a href="#studio">Studio</a></li>
+    <li><a href="#book">Book</a></li>
+  </ul>
+
+  <div class="nav-tools">
+    <button class="icon-btn" type="button" aria-label="Search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+        <circle cx="10.5" cy="10.5" r="6.75"/><path d="M15.6 15.6 21 21"/>
+      </svg>
     </button>
-
-    <ul class="nav__menu" id="nav-menu">
-      <li><a href="#top" aria-current="page">Home</a></li>
-      <li><a href="#training">Training</a></li>
-      <li><a href="#programs">Programs</a></li>
-      <li><a href="#coaches">Coaches</a></li>
-      <li><a href="#tournaments">Tournaments</a></li>
-      <li><a href="#membership">Membership</a></li>
-    </ul>
-
-    <a class="btn btn--light nav__cta" href="#membership">
-      Book a Lesson
-      <span class="btn__icon" aria-hidden="true">
-        <svg viewBox="0 0 16 16"><path d="M3 8h9M8.5 4l4 4-4 4"/></svg>
-      </span>
-    </a>
-  </nav>
-
-  <!-- layer 3 — the stage: type sits BEHIND, the players sit IN FRONT -->
-  <div class="stage">
-
-    <h1 class="stage__type" data-headline>
-      <span class="stage__line">Play Strong<span class="stage__dot">.</span></span>
-    </h1>
-
-    <!-- Swap src for the transparent-background cut-out when it lands. -->
-    <img class="stage__subject"
-         src="assets/hero-players.svg"
-         alt="Two AceTennis players standing back to back on court, one holding a racket and one holding a paddle"
-         width="800" height="1170" fetchpriority="high" decoding="async">
-
-    <div class="stage__caption">
-      <p class="stage__eyebrow">— Since 1998</p>
-      <p class="stage__lede" data-lede>Building Champions On and&nbsp;Off the Court</p>
-      <div class="stage__controls">
-        <button class="round" type="button" data-slide="prev"><span class="sr-only">Previous slide</span>
-          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M13 8H4M7.5 3.5 3 8l4.5 4.5"/></svg>
-        </button>
-        <button class="round" type="button" data-slide="next"><span class="sr-only">Next slide</span>
-          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 3.5 13 8l-4.5 4.5"/></svg>
-        </button>
-        <span class="stage__count"><b data-current>1</b> / <span data-total>3</span></span>
-      </div>
-    </div>
-
+    <button class="icon-btn" type="button" aria-label="Bag">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round">
+        <path d="M4.2 7.5h15.6l-1.2 13.2a1.2 1.2 0 0 1-1.2 1.05H6.6a1.2 1.2 0 0 1-1.2-1.05Z"/>
+        <path d="M8.7 10.2V6.6a3.3 3.3 0 0 1 6.6 0v3.6" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
   </div>
 </header>
 
 <main id="main">
 
-<!-- ============================ TICKER ============================ -->
-<section class="ticker" aria-label="At a glance">
-  <div class="ticker__track">
-    <span>12 Championship Courts</span><i>◆</i>
-    <span>Video Analysis on Every Court</span><i>◆</i>
-    <span>USPTA Certified Coaches</span><i>◆</i>
-    <span>Junior to Pro Pathways</span><i>◆</i>
-    <span>12 Championship Courts</span><i>◆</i>
-    <span>Video Analysis on Every Court</span><i>◆</i>
-    <span>USPTA Certified Coaches</span><i>◆</i>
-    <span>Junior to Pro Pathways</span><i>◆</i>
+<!-- ============================ HERO ============================ -->
+<section class="hero" id="top">
+  <div class="masthead">
+    <h1 class="wordmark"><span class="w-bare">Barely</span> <span class="w-gloss">Gloss</span></h1>
+    <div class="blurbs">
+      <p class="blurb">
+        Premium nails, lash artistry, and relaxing hand &amp; foot spa
+        services designed to enhance your everyday glow.
+      </p>
+      <p class="blurb blurb-end">
+        From nail extensions and mani-pedi care to lash lifts and spa
+        treatments, Barely Gloss delivers beauty with comfort and style.
+      </p>
+    </div>
+  </div>
+
+  <div class="cutout" aria-hidden="true"></div>
+
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-figure"><span class="stat-value">40%</span><span class="stat-label">Nail Artistry</span></div>
+      <span class="stat-rule" aria-hidden="true"></span>
+    </div>
+    <div class="stat">
+      <div class="stat-figure"><span class="stat-value">30%</span><span class="stat-label">Lash Services</span></div>
+      <span class="stat-rule" aria-hidden="true"></span>
+    </div>
+    <div class="stat">
+      <div class="stat-figure"><span class="stat-value">20%</span><span class="stat-label">Spa Treatments</span></div>
+      <span class="stat-rule" aria-hidden="true"></span>
+    </div>
   </div>
 </section>
 
-<!-- ============================ TRAINING ============================ -->
-<section class="section" id="training">
-  <div class="wrap split">
-    <div>
-      <p class="eyebrow"><span class="dot" aria-hidden="true"></span> How it works</p>
-      <h2 class="h2">Train smarter.<br>Improve faster.</h2>
+<!-- ============================ MARQUEE ============================ -->
+<div class="marquee" aria-hidden="true">
+  <ul>
+    <li>Single-use files</li><li>Vegan-friendly polish</li><li>Walk-in soak-off</li>
+    <li>Licensed technicians</li><li>Aftercare included</li>
+    <li>Single-use files</li><li>Vegan-friendly polish</li><li>Walk-in soak-off</li>
+    <li>Licensed technicians</li><li>Aftercare included</li>
+  </ul>
+</div>
+
+<!-- ============================ TREATMENTS ============================ -->
+<section class="section section--light" id="treatments">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">The menu</p>
+        <h2>Find your treatment</h2>
+      </div>
+      <div class="filters" role="group" aria-label="Filter treatments">
+        <button class="filter" type="button" data-filter="all" aria-pressed="true">Everything</button>
+        <button class="filter" type="button" data-filter="nails" aria-pressed="false">Nails</button>
+        <button class="filter" type="button" data-filter="lashes" aria-pressed="false">Lashes</button>
+        <button class="filter" type="button" data-filter="spa" aria-pressed="false">Spa</button>
+      </div>
     </div>
-    <div class="split__body">
-      <p>Every session is filmed, tagged and reviewed. You leave the court knowing exactly what changed, what to drill next week, and how it moves your ranking — not just how tired you are.</p>
-      <div class="stats">
-        <div class="stat"><b>4,200+</b><span>Players coached</span></div>
-        <div class="stat"><b>27</b><span>National titles</span></div>
-        <div class="stat"><b>98%</b><span>Renew each season</span></div>
+
+    <div class="menu-grid" id="menu-grid">
+      <article class="treatment" data-kind="nails">
+        <div class="treatment-art"><img src="assets/treat-signature.webp" alt="Almond nails in a sheer milky blush gel with a high gloss" loading="lazy" width="760" height="760"></div>
+        <span class="treatment-flag treatment-flag--hot">Most booked</span>
+        <div class="treatment-panel">
+          <div class="treatment-lines">
+            <p class="treatment-kind">Nails</p>
+            <h3 class="treatment-name">Signature Gel Manicure</h3>
+            <p class="treatment-meta">60 min <span aria-hidden="true">·</span> <b><span class="meta-from">from </span>₱1,150</b></p>
+          </div>
+          <button class="book" type="button" aria-label="Book Signature Gel Manicure">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>
+          </button>
+        </div>
+      </article>
+
+      <article class="treatment" data-kind="nails">
+        <div class="treatment-art"><img src="assets/treat-builder.webp" alt="Almond nails in a milky rose gel, thickened at the stress point" loading="lazy" width="760" height="760"></div>
+        <div class="treatment-panel">
+          <div class="treatment-lines">
+            <p class="treatment-kind">Nails</p>
+            <h3 class="treatment-name">Builder Gel Overlay</h3>
+            <p class="treatment-meta">90 min <span aria-hidden="true">·</span> <b><span class="meta-from">from </span>₱1,950</b></p>
+          </div>
+          <button class="book" type="button" aria-label="Book Builder Gel Overlay">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>
+          </button>
+        </div>
+      </article>
+
+      <article class="treatment" data-kind="nails">
+        <div class="treatment-art"><img src="assets/treat-russian.webp" alt="Almond nails in a glossy taupe-mauve gel, cuticles worked flush to the skin" loading="lazy" width="760" height="760"></div>
+        <div class="treatment-panel">
+          <div class="treatment-lines">
+            <p class="treatment-kind">Nails</p>
+            <h3 class="treatment-name">Russian Cuticle Work</h3>
+            <p class="treatment-meta">75 min <span aria-hidden="true">·</span> <b><span class="meta-from">from </span>₱1,450</b></p>
+          </div>
+          <button class="book" type="button" aria-label="Book Russian Cuticle Work">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>
+          </button>
+        </div>
+      </article>
+
+      <article class="treatment" data-kind="nails">
+        <div class="treatment-art"><img src="assets/treat-art.webp" alt="Sheer nude nails with hand-painted blossom art and a scatter of gold fleck" loading="lazy" width="760" height="760"></div>
+        <div class="treatment-panel">
+          <div class="treatment-lines">
+            <p class="treatment-kind">Nails</p>
+            <h3 class="treatment-name">Hand-Painted Art</h3>
+            <p class="treatment-meta">30 min <span aria-hidden="true">·</span> <b><span class="meta-from">from </span>₱450</b></p>
+          </div>
+          <button class="book" type="button" aria-label="Book Hand-Painted Art">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>
+          </button>
+        </div>
+      </article>
+
+      <article class="treatment treatment--drawn" data-kind="lashes">
+        <div class="treatment-art"><svg aria-hidden="true"><use href="#motif-lash"/></svg></div>
+        <span class="treatment-flag">Patch test</span>
+        <div class="treatment-panel">
+          <div class="treatment-lines">
+            <p class="treatment-kind">Lashes</p>
+            <h3 class="treatment-name">Classic Extensions</h3>
+            <p class="treatment-meta">120 min <span aria-hidden="true">·</span> <b><span class="meta-from">from </span>₱2,600</b></p>
+          </div>
+          <button class="book" type="button" aria-label="Book Classic Extensions">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>
+          </button>
+        </div>
+      </article>
+
+      <article class="treatment treatment--drawn" data-kind="lashes">
+        <div class="treatment-art"><svg aria-hidden="true"><use href="#motif-lash"/></svg></div>
+        <span class="treatment-flag">Patch test</span>
+        <div class="treatment-panel">
+          <div class="treatment-lines">
+            <p class="treatment-kind">Lashes</p>
+            <h3 class="treatment-name">Volume Set</h3>
+            <p class="treatment-meta">150 min <span aria-hidden="true">·</span> <b><span class="meta-from">from </span>₱3,900</b></p>
+          </div>
+          <button class="book" type="button" aria-label="Book Volume Set">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>
+          </button>
+        </div>
+      </article>
+
+      <article class="treatment treatment--drawn" data-kind="lashes">
+        <div class="treatment-art"><svg aria-hidden="true"><use href="#motif-lash"/></svg></div>
+        <span class="treatment-flag">Patch test</span>
+        <div class="treatment-panel">
+          <div class="treatment-lines">
+            <p class="treatment-kind">Lashes</p>
+            <h3 class="treatment-name">Lash Lift &amp; Tint</h3>
+            <p class="treatment-meta">60 min <span aria-hidden="true">·</span> <b><span class="meta-from">from </span>₱1,550</b></p>
+          </div>
+          <button class="book" type="button" aria-label="Book Lash Lift &amp; Tint">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>
+          </button>
+        </div>
+      </article>
+
+      <article class="treatment treatment--drawn" data-kind="spa">
+        <div class="treatment-art"><svg aria-hidden="true"><use href="#motif-spa"/></svg></div>
+        <div class="treatment-panel">
+          <div class="treatment-lines">
+            <p class="treatment-kind">Spa</p>
+            <h3 class="treatment-name">Hand &amp; Arm Ritual</h3>
+            <p class="treatment-meta">45 min <span aria-hidden="true">·</span> <b><span class="meta-from">from </span>₱1,250</b></p>
+          </div>
+          <button class="book" type="button" aria-label="Book Hand &amp; Arm Ritual">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>
+          </button>
+        </div>
+      </article>
+
+      <article class="treatment treatment--drawn" data-kind="spa">
+        <div class="treatment-art"><svg aria-hidden="true"><use href="#motif-spa"/></svg></div>
+        <div class="treatment-panel">
+          <div class="treatment-lines">
+            <p class="treatment-kind">Spa</p>
+            <h3 class="treatment-name">Foot &amp; Calf Ritual</h3>
+            <p class="treatment-meta">60 min <span aria-hidden="true">·</span> <b><span class="meta-from">from </span>₱1,500</b></p>
+          </div>
+          <button class="book" type="button" aria-label="Book Foot &amp; Calf Ritual">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>
+          </button>
+        </div>
+      </article>
+
+      <article class="treatment treatment--drawn" data-kind="spa">
+        <div class="treatment-art"><svg aria-hidden="true"><use href="#motif-spa"/></svg></div>
+        <div class="treatment-panel">
+          <div class="treatment-lines">
+            <p class="treatment-kind">Spa</p>
+            <h3 class="treatment-name">Paraffin Treatment</h3>
+            <p class="treatment-meta">30 min <span aria-hidden="true">·</span> <b><span class="meta-from">from </span>₱700</b></p>
+          </div>
+          <button class="book" type="button" aria-label="Book Paraffin Treatment">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>
+          </button>
+        </div>
+      </article>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================ DISCIPLINES ============================ -->
+<section class="section section--dark" id="studio">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Three disciplines</p>
+        <h2>One studio.<br><em>Three rooms.</em></h2>
+      </div>
+      <p class="lede">
+        Each discipline has its own technician, its own room and its own
+        booking. Nothing is squeezed onto the end of something else.
+      </p>
+    </div>
+
+    <div class="discipline-grid">
+      <article class="discipline">
+        <img src="assets/card-nails.webp" alt="Manicured almond nails in a soft gloss finish">
+        <span class="tag">Nails</span>
+        <h3>Structure first,<br>colour second.</h3>
+        <p>Hand-filed shaping, builder gel for strength, and a finish that holds its shine for a full four weeks.</p>
+        <a class="btn" href="#treatments">See nail menu</a>
+      </article>
+
+      <article class="discipline">
+        <img src="assets/card-lashes.webp" alt="Low studio light against a dark ground">
+        <span class="tag">Lashes</span>
+        <h3>Weight you<br>cannot feel.</h3>
+        <p>Mapped to your eye shape and applied lash by lash, with a refill rhythm matched to your own growth cycle.</p>
+        <a class="btn" href="#treatments">See lash menu</a>
+      </article>
+
+      <article class="discipline">
+        <img src="assets/card-spa.webp" alt="Folds of pearl silk">
+        <span class="tag">Spa</span>
+        <h3>An hour that<br>is entirely yours.</h3>
+        <p>Warm oil, paraffin and slow massage for hands and feet. Booked on its own, never rushed.</p>
+        <a class="btn" href="#treatments">See spa menu</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ IN THE CHAIR ============================ -->
+<section class="section section--dark" style="padding-top:0">
+  <div class="wrap">
+    <div class="banner">
+      <img src="assets/hero-hands.jpg" alt="">
+      <p class="eyebrow">In the chair</p>
+      <h2>Shaped by hand.<br><em>Finished with patience.</em></h2>
+      <a class="btn" href="#book">Book an appointment</a>
+
+      <p class="tab-body" id="tab-body">
+        Every file, buffer and wooden stick is single-use. Metal tools are
+        pouched, autoclaved and opened in front of you at the chair.
+      </p>
+
+      <div class="tabs" role="tablist" aria-label="What happens during an appointment">
+        <button class="tab" type="button" role="tab" aria-selected="true"
+          data-copy="Every file, buffer and wooden stick is single-use. Metal tools are pouched, autoclaved and opened in front of you at the chair.">
+          1. Sterile by default
+        </button>
+        <button class="tab" type="button" role="tab" aria-selected="false"
+          data-copy="No electric drill touches the natural nail. Shape is filed by hand and cuticles are worked cold, with cream and a curette rather than heat.">
+          2. Shaped by hand
+        </button>
+        <button class="tab" type="button" role="tab" aria-selected="false"
+          data-copy="Every set leaves with cuticle oil and a written aftercare card matched to your finish, plus the date we would like to see you back.">
+          3. Sent home ready
+        </button>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ============================ PROGRAMS ============================ -->
-<section class="section section--tight" id="programs">
+<!-- ============================ WEAR TIMELINE ============================ -->
+<section class="section section--light">
   <div class="wrap">
-    <div class="section__head">
-      <h2 class="h2">Programs</h2>
-      <a class="link" href="#membership">See all pricing
-        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4"/></svg>
-      </a>
-    </div>
-
-    <ul class="cards">
-      <li class="card">
-        <span class="card__num">01</span>
-        <h3>Junior Academy</h3>
-        <p>Ages 6–17. Four levels from first-swing red ball through national tournament prep, with strength and movement built in.</p>
-        <span class="card__meta">3–5 sessions / week</span>
-      </li>
-      <li class="card">
-        <span class="card__num">02</span>
-        <h3>Adult Clinics</h3>
-        <p>Small-group coaching at 2.5 through 5.0 NTRP. Drill blocks, live points, and a match every Friday night under lights.</p>
-        <span class="card__meta">Drop-in or 10-pack</span>
-      </li>
-      <li class="card">
-        <span class="card__num">03</span>
-        <h3>Private Coaching</h3>
-        <p>One-on-one with a head coach. Serve rebuilds, tactical patterning and pre-tournament tune-ups, filmed end to end.</p>
-        <span class="card__meta">60 or 90 minutes</span>
-      </li>
-      <li class="card">
-        <span class="card__num">04</span>
-        <h3>Performance Lab</h3>
-        <p>Racket speed, spin rate and split-step timing measured on court, then turned into a six-week block you can actually follow.</p>
-        <span class="card__meta">By assessment</span>
-      </li>
-    </ul>
-  </div>
-</section>
-
-<!-- ============================ COACHES ============================ -->
-<section class="section section--tight" id="coaches">
-  <div class="wrap">
-    <div class="section__head">
-      <h2 class="h2">The bench</h2>
-      <p class="section__note">Nine full-time coaches. No rotating staff, no filler sessions.</p>
-    </div>
-    <ul class="coaches">
-      <li><b>Mara Oyelaran</b><span>Director of Performance</span></li>
-      <li><b>Tomas Ruiz</b><span>Head Coach, Juniors</span></li>
-      <li><b>Ji-woo Han</b><span>Serve &amp; Return Specialist</span></li>
-      <li><b>Dana Whitfield</b><span>Strength &amp; Movement</span></li>
-    </ul>
-  </div>
-</section>
-
-<!-- ============================ CTA ============================ -->
-<section class="cta" id="membership">
-  <div class="wrap cta__inner">
-    <h2 class="cta__type">Your court<br>is waiting<span class="stage__dot">.</span></h2>
-    <div class="cta__side">
-      <p>Book a free 45-minute assessment. We film it, grade it, and hand you a plan — whether or not you join.</p>
-      <div class="cta__row">
-        <a class="btn btn--accent" href="#membership">Book a Lesson
-          <span class="btn__icon" aria-hidden="true"><svg viewBox="0 0 16 16"><path d="M3 8h9M8.5 4l4 4-4 4"/></svg></span>
-        </a>
-        <a class="btn btn--ghost" href="#tournaments">Tournament calendar</a>
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">How long it lasts</p>
+        <h2>Gel, week by week.<br><em>No surprises.</em></h2>
       </div>
+      <p class="lede">
+        The question everyone asks and almost nobody answers straight. New
+        growth does not chip the polish — it pushes it away from the cuticle.
+      </p>
     </div>
+
+    <figure class="wear">
+      <div class="wear-scroll">
+        <svg viewBox="0 0 1200 290" role="img"
+          aria-label="Four nails from day one to week four. The band of unpolished new growth at the cuticle widens by roughly a millimetre each week, and weeks three to four are marked as the window to rebook.">
+          <defs>
+            <!-- Polish is clipped from the tip downwards, so the uncovered
+                 band grows at the cuticle where the nail actually grows. -->
+            <clipPath id="gel-0"><rect x="-6" y="-6" width="92" height="124"/></clipPath>
+            <clipPath id="gel-1"><rect x="-6" y="-6" width="92" height="115"/></clipPath>
+            <clipPath id="gel-2"><rect x="-6" y="-6" width="92" height="106"/></clipPath>
+            <clipPath id="gel-3"><rect x="-6" y="-6" width="92" height="97"/></clipPath>
+          </defs>
+
+          <g stroke-linecap="round">
+            <g transform="translate(110,20)">
+              <path d="M40 2C56 26 64 66 61 94c-2 16-11 24-21 24s-19-8-21-24C16 66 24 26 40 2Z" fill="#EFE4D6"/>
+              <path d="M40 2C56 26 64 66 61 94c-2 16-11 24-21 24s-19-8-21-24C16 66 24 26 40 2Z" fill="#B46F35" clip-path="url(#gel-0)"/>
+              <path d="M40 2C56 26 64 66 61 94c-2 16-11 24-21 24s-19-8-21-24C16 66 24 26 40 2Z" fill="none" stroke="currentColor" stroke-width="2.4"/>
+            </g>
+            <g transform="translate(410,20)">
+              <path d="M40 2C56 26 64 66 61 94c-2 16-11 24-21 24s-19-8-21-24C16 66 24 26 40 2Z" fill="#EFE4D6"/>
+              <path d="M40 2C56 26 64 66 61 94c-2 16-11 24-21 24s-19-8-21-24C16 66 24 26 40 2Z" fill="#B46F35" clip-path="url(#gel-1)"/>
+              <path d="M40 2C56 26 64 66 61 94c-2 16-11 24-21 24s-19-8-21-24C16 66 24 26 40 2Z" fill="none" stroke="currentColor" stroke-width="2.4"/>
+            </g>
+            <g transform="translate(710,20)">
+              <path d="M40 2C56 26 64 66 61 94c-2 16-11 24-21 24s-19-8-21-24C16 66 24 26 40 2Z" fill="#EFE4D6"/>
+              <path d="M40 2C56 26 64 66 61 94c-2 16-11 24-21 24s-19-8-21-24C16 66 24 26 40 2Z" fill="#B46F35" clip-path="url(#gel-2)"/>
+              <path d="M40 2C56 26 64 66 61 94c-2 16-11 24-21 24s-19-8-21-24C16 66 24 26 40 2Z" fill="none" stroke="currentColor" stroke-width="2.4"/>
+            </g>
+            <g transform="translate(1010,20)">
+              <path d="M40 2C56 26 64 66 61 94c-2 16-11 24-21 24s-19-8-21-24C16 66 24 26 40 2Z" fill="#EFE4D6"/>
+              <path d="M40 2C56 26 64 66 61 94c-2 16-11 24-21 24s-19-8-21-24C16 66 24 26 40 2Z" fill="#B46F35" clip-path="url(#gel-3)"/>
+              <path d="M40 2C56 26 64 66 61 94c-2 16-11 24-21 24s-19-8-21-24C16 66 24 26 40 2Z" fill="none" stroke="currentColor" stroke-width="2.4"/>
+            </g>
+          </g>
+
+          <g font-size="13" text-anchor="middle" fill="currentColor" opacity="0.62">
+            <text x="150" y="162">flush</text>
+            <text x="450" y="162">≈ 1 mm</text>
+            <text x="750" y="162">≈ 2 mm</text>
+            <text x="1050" y="162">≈ 3 mm</text>
+          </g>
+
+          <line x1="150" y1="208" x2="1050" y2="208" stroke="currentColor" stroke-width="2" opacity="0.22"/>
+          <line x1="750" y1="208" x2="1050" y2="208" stroke="#B46F35" stroke-width="4" stroke-linecap="round"/>
+
+          <g stroke="none">
+            <circle cx="150" cy="208" r="5.5" fill="currentColor" opacity="0.45"/>
+            <circle cx="450" cy="208" r="5.5" fill="currentColor" opacity="0.45"/>
+            <circle cx="750" cy="208" r="6.5" fill="#B46F35"/>
+            <circle cx="1050" cy="208" r="6.5" fill="#B46F35"/>
+          </g>
+
+          <g font-size="14" text-anchor="middle" fill="currentColor">
+            <text x="150" y="238">Day 1</text>
+            <text x="450" y="238">Week 2</text>
+            <text x="750" y="238">Week 3</text>
+            <text x="1050" y="238">Week 4</text>
+          </g>
+
+          <text x="900" y="268" font-size="12" text-anchor="middle" fill="#B46F35"
+            letter-spacing="1.6">REBOOK WINDOW</text>
+        </svg>
+      </div>
+
+      <figcaption>
+        New growth pushes the polish away from the cuticle at roughly a
+        millimetre a week. Weeks three and four are the window to come back.
+      </figcaption>
+    </figure>
+
+    <ol class="stage-notes">
+      <li>
+        <p class="stage-when">Day 1</p>
+        <h3>Full gloss</h3>
+        <p>Cured hard and flush to the cuticle. Shower, cook and type within the hour.</p>
+      </li>
+      <li>
+        <p class="stage-when">Week 2</p>
+        <h3>First regrowth</h3>
+        <p>A millimetre shows at the base. Still even, still glossy — nothing needs doing.</p>
+      </li>
+      <li>
+        <p class="stage-when">Week 3</p>
+        <h3>Visible line</h3>
+        <p>Reads at arm's length. Most clients rebook here, before the free edge lifts.</p>
+      </li>
+      <li>
+        <p class="stage-when">Week 4</p>
+        <h3>Time to rebook</h3>
+        <p>The overlay starts to lever on new growth. Come in for a proper soak-off.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ============================ QUOTE ============================ -->
+<section class="quote-split" aria-label="What clients say">
+  <div class="quote-art"><img src="assets/quote.webp" alt="Folds of pearl silk catching the studio light"></div>
+
+  <div class="quote-panel">
+    <p class="eyebrow">In their words</p>
+    <blockquote id="quote-text">
+      “I have never had a set last four full weeks without a single lift. I
+      stopped budgeting for a mid-month fix.”
+    </blockquote>
+    <div class="quote-who">
+      <span class="quote-name" id="quote-name">Amara Whitfield</span>
+      <span class="quote-service" id="quote-service">Builder Gel Overlay · client since 2023</span>
+    </div>
+
+    <div class="quote-nav">
+      <button class="icon-round" type="button" id="quote-prev" aria-label="Previous quote">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 6 9 12l6 6"/></svg>
+      </button>
+      <span class="quote-count"><span id="quote-index">1</span> / 3</span>
+      <span class="quote-track"><span id="quote-bar" style="width:33.33%"></span></span>
+      <button class="icon-round" type="button" id="quote-next" aria-label="Next quote">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ BOOKING ============================ -->
+<section class="section section--dark" id="book">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <p class="eyebrow">Booking</p>
+        <h2>Reserve your<br><em>chair.</em></h2>
+      </div>
+      <p class="lede">
+        One chair, one technician, for as long as your service takes. Pick a
+        treatment and the studio's open hours will do the rest.
+      </p>
+    </div>
+
+    <div class="book-grid">
+      <aside class="book-aside">
+        <img class="book-shot" src="assets/treat-signature.webp"
+          alt="Almond nails in a sheer milky blush gel" loading="lazy" width="760" height="760">
+
+        <div class="book-card book-studio">
+          <div class="studio-head">
+            <h3>The studio</h3>
+            <p class="studio-status" id="studio-status" role="status">
+              <span class="dot" aria-hidden="true"></span>
+              <span id="studio-status-text">Hours below</span>
+            </p>
+          </div>
+
+          <ul class="hours-list" id="hours-list">
+            <li data-days="2 3"><span>Tue – Wed</span><span>10:00 – 19:00</span></li>
+            <li data-days="4 5"><span>Thu – Fri</span><span>10:00 – 20:00</span></li>
+            <li data-days="6"><span>Saturday</span><span>09:00 – 18:00</span></li>
+            <li data-days="0"><span>Sunday</span><span>11:00 – 17:00</span></li>
+            <li data-days="1"><span>Monday</span><span>Closed</span></li>
+          </ul>
+
+          <address>
+            Purok 3, Buru-un · Iligan City<br>
+            Along Linamon–Zamboanga Rd, beside 7-Eleven
+          </address>
+
+          <p class="studio-contact">
+            <a href="tel:+639175550148">+63 917 555 0148</a>
+            <a href="mailto:studio@barelygloss.com">studio@barelygloss.com</a>
+          </p>
+        </div>
+
+        <div class="book-card book-card--warm">
+          <h3>Before you come</h3>
+          <ul>
+            <li>New lash sets need a patch test 48 hours ahead.</li>
+            <li>Bare nails if you can — a soak-off adds 20 minutes and ₱350.</li>
+            <li>Move or cancel free up to 12 hours ahead; half the fee holds it after.</li>
+          </ul>
+        </div>
+      </aside>
+
+      <form class="book-form" id="book-form" novalidate>
+        <div class="field">
+          <label for="bk-service">Treatment <span aria-hidden="true">*</span></label>
+          <select id="bk-service" name="service" required>
+            <option value="" selected disabled>Choose a treatment</option>
+            <optgroup label="Nails">
+              <option data-min="60" data-price="1,150">Signature Gel Manicure · 60 min · from ₱1,150</option>
+              <option data-min="90" data-price="1,950">Builder Gel Overlay · 90 min · from ₱1,950</option>
+              <option data-min="75" data-price="1,450">Russian Cuticle Work · 75 min · from ₱1,450</option>
+              <option data-min="30" data-price="450">Hand-Painted Art · 30 min · from ₱450</option>
+            </optgroup>
+            <optgroup label="Lashes">
+              <option data-min="120" data-price="2,600" data-patch="1">Classic Extensions · 120 min · from ₱2,600</option>
+              <option data-min="150" data-price="3,900" data-patch="1">Volume Set · 150 min · from ₱3,900</option>
+              <option data-min="60" data-price="1,550" data-patch="1">Lash Lift &amp; Tint · 60 min · from ₱1,550</option>
+            </optgroup>
+            <optgroup label="Spa">
+              <option data-min="45" data-price="1,250">Hand &amp; Arm Ritual · 45 min · from ₱1,250</option>
+              <option data-min="60" data-price="1,500">Foot &amp; Calf Ritual · 60 min · from ₱1,500</option>
+              <option data-min="30" data-price="700">Paraffin Treatment · 30 min · from ₱700</option>
+            </optgroup>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="bk-name">Name <span aria-hidden="true">*</span></label>
+          <input id="bk-name" name="name" type="text" autocomplete="name" placeholder="Your name" required>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="bk-email">Email <span aria-hidden="true">*</span></label>
+            <input id="bk-email" name="email" type="email" autocomplete="email" placeholder="you@email.com" required>
+          </div>
+          <div class="field">
+            <label for="bk-phone">Mobile <span aria-hidden="true">*</span></label>
+            <input id="bk-phone" name="phone" type="tel" autocomplete="tel" placeholder="0917 000 0000" required>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="bk-date">Date <span aria-hidden="true">*</span></label>
+          <input id="bk-date" name="date" type="date" required>
+          <p class="field-note" id="bk-day-note">Closed Mondays.</p>
+        </div>
+
+        <fieldset class="field slots" id="bk-slots-field">
+          <legend>Start time <span aria-hidden="true">*</span></legend>
+          <div class="slot-grid" id="bk-slots" role="radiogroup" aria-label="Available start times">
+            <p class="slot-empty">Choose a treatment and a date to see open times.</p>
+          </div>
+        </fieldset>
+
+        <div class="notice" id="bk-patch" hidden>
+          <strong>Patch test needed.</strong> First lash sets need one 48 hours
+          before the appointment. Pick a later date, or book the patch test and
+          we will hold this slot.
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="bk-occasion">Occasion <span class="opt">optional</span></label>
+            <select id="bk-occasion" name="occasion">
+              <option value="">Just because</option>
+              <option>Birthday</option>
+              <option>Debut</option>
+              <option>Wedding or entourage</option>
+              <option>Graduation</option>
+              <option>Anniversary</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="bk-first">Been before? <span class="opt">optional</span></label>
+            <select id="bk-first" name="first">
+              <option value="">Returning client</option>
+              <option>First visit</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="bk-notes">Anything we should know <span class="opt">optional</span></label>
+          <textarea id="bk-notes" name="notes" rows="3"
+            placeholder="Shape and length you want, allergies, inspiration photos you'll bring"></textarea>
+        </div>
+
+        <p class="book-summary" id="bk-summary">Nothing selected yet.</p>
+
+        <button class="btn book-submit" type="submit">Request this booking</button>
+
+        <p class="book-fine" id="bk-fine" role="status">
+          We reply by text within one working day to confirm. Nothing is charged now.
+        </p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============================ SIGNUP ============================ -->
+<section class="signup">
+  <div class="wrap">
+    <p class="eyebrow">Keep in touch</p>
+    <h2>Two emails a month.<br><em>Never more.</em></h2>
+    <p class="lede">Cancellation openings, seasonal shades, and the occasional aftercare note worth reading.</p>
+
+    <form id="signup-form" novalidate>
+      <label class="skip" for="signup-email">Email address</label>
+      <input id="signup-email" name="email" type="email" placeholder="Enter your email" autocomplete="email" required>
+      <button type="submit" aria-label="Subscribe">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m9 6 6 6-6 6"/></svg>
+      </button>
+    </form>
+    <p class="signup-note" id="signup-note" role="status"></p>
+    <small>No sharing, no selling. Unsubscribe from any email.</small>
   </div>
 </section>
 
 </main>
 
-<footer class="foot" id="tournaments">
-  <div class="wrap foot__inner">
-    <p class="foot__brand">Ace<em>Tennis</em></p>
-    <nav class="foot__links" aria-label="Footer">
-      <a href="#training">Training</a>
-      <a href="#programs">Programs</a>
-      <a href="#coaches">Coaches</a>
-      <a href="#membership">Membership</a>
-    </nav>
-    <p class="foot__legal">© 1998–2026 AceTennis Club. All rights reserved.</p>
+<!-- ============================ FOOTER ============================ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <span class="brand">Barely Gloss</span>
+        <p class="footer-say">We would rather do four sets a day properly.</p>
+      </div>
+
+      <div>
+        <h4>Studio</h4>
+        <ul>
+          <li><a href="#studio">Our disciplines</a></li>
+          <li><a href="#treatments">Treatment menu</a></li>
+          <li><a href="#book">Opening hours</a></li>
+          <li><a href="#top">Gift cards</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Booking</h4>
+        <ul>
+          <li><a href="#book">Request a time</a></li>
+          <li><a href="#book">Patch test policy</a></li>
+          <li><a href="#book">Cancellations</a></li>
+          <li><a href="#treatments">Aftercare</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Find us</h4>
+        <address>
+          Purok 3, Buru-un, Iligan City<br>Along Linamon–Zamboanga Rd, beside 7-Eleven Buru-un
+          <a href="mailto:studio@barelygloss.com">studio@barelygloss.com</a>
+          <span>+63 917 555 0148</span>
+        </address>
+      </div>
+    </div>
+
+    <div class="footer-base">
+      <span>© 2026 Barely Gloss Studio</span>
+      <span>@barelygloss</span>
+    </div>
   </div>
 </footer>
 
-<script src="script.js"></script>
+<script src="barely-gloss.js"></script>
 </body>
 </html>
