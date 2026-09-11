@@ -1011,11 +1011,26 @@ blockquote {
   padding: 14px 16px;
   border: 1px solid var(--rule-dark);
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.045);
+  /* background-color, not the shorthand: the select below layers its own
+     chevron as a background-image and the shorthand would wipe it. */
+  background-color: rgba(255, 255, 255, 0.045);
   color: var(--on-dark);
   font-family: var(--font-body);
   font-size: 15px;
   transition: border-color 0.2s, background-color 0.2s;
+}
+
+/* Browsers each draw the native select arrow differently and all of them
+   crowd it against the border. Ours sits on the same 18px inset as the date
+   picker's, so every control in the form lines up. */
+.book-form select {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: 46px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ADAAA7' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 18px center;
+  background-size: 15px;
 }
 
 .book-form textarea { resize: vertical; line-height: 1.55; }
@@ -1026,17 +1041,21 @@ blockquote {
 .book-form textarea:focus {
   outline: none;
   border-color: var(--champagne);
-  background: rgba(255, 255, 255, 0.07);
+  background-color: rgba(255, 255, 255, 0.07);
 }
 
 .book-form :focus-visible { outline: 2px solid var(--champagne); outline-offset: 2px; }
 
-/* date pickers render a near-black glyph on a dark field by default */
+/* date pickers render a near-black glyph on a dark field by default, and
+   park it tight against the edge */
+.book-form input[type='date'] { padding-right: 12px; }
 .book-form input[type='date']::-webkit-calendar-picker-indicator {
+  margin-right: 6px;
   filter: invert(1);
-  opacity: 0.6;
+  opacity: 0.55;
   cursor: pointer;
 }
+.book-form input[type='date']::-webkit-calendar-picker-indicator:hover { opacity: 0.85; }
 
 .book-form [aria-invalid='true'] { border-color: #D9736A; }
 
