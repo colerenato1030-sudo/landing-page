@@ -1,0 +1,23 @@
+{
+  "name": "landing-page",
+  "version": "1.0.0",
+  "description": "A static landing page. No build step: open `index.html`, or serve the folder.",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/colerenato1030-sudo/landing-page.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/colerenato1030-sudo/landing-page/issues"
+  },
+  "homepage": "https://github.com/colerenato1030-sudo/landing-page#readme",
+  "dependencies": {
+    "gsap": "^3.15.0"
+  }
+}
