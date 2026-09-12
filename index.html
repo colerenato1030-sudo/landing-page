@@ -10,6 +10,17 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600;1,700&display=swap">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="barely-gloss.css">
+
+<!-- Marks the document before first paint so the stylesheet can hold the
+     animated elements back. Without it the page paints, then GSAP hides
+     what it is about to reveal — a visible flash on a cold cache. Anyone
+     who asked for less motion, or whose scripts never arrive, keeps the
+     plain page: barely-gloss.js drops the class if GSAP fails to load. -->
+<script>
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.documentElement.classList.add('js-motion');
+  }
+</script>
 </head>
 <body>
 
@@ -405,13 +416,13 @@
           </g>
 
           <line x1="150" y1="208" x2="1050" y2="208" stroke="currentColor" stroke-width="2" opacity="0.22"/>
-          <line x1="750" y1="208" x2="1050" y2="208" stroke="#B46F35" stroke-width="4" stroke-linecap="round"/>
+          <line class="wear-track" x1="750" y1="208" x2="1050" y2="208" stroke="#B46F35" stroke-width="4" stroke-linecap="round"/>
 
           <g stroke="none">
             <circle cx="150" cy="208" r="5.5" fill="currentColor" opacity="0.45"/>
             <circle cx="450" cy="208" r="5.5" fill="currentColor" opacity="0.45"/>
-            <circle cx="750" cy="208" r="6.5" fill="#B46F35"/>
-            <circle cx="1050" cy="208" r="6.5" fill="#B46F35"/>
+            <circle class="wear-mark" cx="750" cy="208" r="6.5" fill="#B46F35"/>
+            <circle class="wear-mark" cx="1050" cy="208" r="6.5" fill="#B46F35"/>
           </g>
 
           <g font-size="14" text-anchor="middle" fill="currentColor">
@@ -421,7 +432,7 @@
             <text x="1050" y="238">Week 4</text>
           </g>
 
-          <text x="900" y="268" font-size="12" text-anchor="middle" fill="#B46F35"
+          <text class="wear-mark" x="900" y="268" font-size="12" text-anchor="middle" fill="#B46F35"
             letter-spacing="1.6">REBOOK WINDOW</text>
         </svg>
       </div>
@@ -707,6 +718,8 @@
   </div>
 </footer>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 <script src="barely-gloss.js"></script>
 </body>
 </html>

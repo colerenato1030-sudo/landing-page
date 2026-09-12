@@ -4,6 +4,11 @@
 (() => {
   'use strict';
 
+  // Filled in by the motion layer at the foot of this file, and only when
+  // GSAP is there to fill it. Every entry is optional: call them with ?. and
+  // the page behaves exactly as it did before animation was added.
+  const motion = {};
+
   /* ---------- header: mobile panel + stuck state ---------- */
 
   const header = document.getElementById('header');
@@ -59,13 +64,14 @@
       const kind = btn.dataset.filter;
       filters.forEach((f) => f.setAttribute('aria-pressed', String(f === btn)));
 
-      let shown = 0;
+      const shown = [];
       treatments.forEach((card) => {
         const match = kind === 'all' || card.dataset.kind === kind;
         card.hidden = !match;
-        if (match) shown++;
+        if (match) shown.push(card);
       });
-      empty.hidden = shown > 0;
+      empty.hidden = shown.length > 0;
+      motion.filter?.(shown);
     });
   });
 
@@ -121,11 +127,17 @@
   function showQuote(i) {
     at = (i + quotes.length) % quotes.length;
     const q = quotes[at];
-    qText.textContent = q.text;
-    qName.textContent = q.name;
-    qService.textContent = q.service;
-    qIndex.textContent = String(at + 1);
-    qBar.style.width = `${((at + 1) / quotes.length) * 100}%`;
+    const paint = () => {
+      qText.textContent = q.text;
+      qName.textContent = q.name;
+      qService.textContent = q.service;
+      qIndex.textContent = String(at + 1);
+      qBar.style.width = `${((at + 1) / quotes.length) * 100}%`;
+    };
+    // With motion the swap happens inside a crossfade, so the words never
+    // change under a reader mid-sentence.
+    if (motion.quote) motion.quote(paint);
+    else paint();
   }
 
   document.getElementById('quote-prev').addEventListener('click', () => showQuote(at - 1));
@@ -318,6 +330,7 @@
       bkSlots.prepend(Object.assign(document.createElement('p'),
         { className: 'slot-empty', textContent: 'Nothing left today — try tomorrow.' }));
     }
+    motion.slots?.(bkSlots);
     fillSummary();
   }
 
@@ -387,4 +400,149 @@
     );
     targets.forEach((t) => spy.observe(t));
   }
+
+  /* ---------- motion ---------- */
+  // The stylesheet holds the revealed elements at zero opacity, but only
+  // while <html> carries .js-motion — a class an inline script in the head
+  // sets before first paint, and only when motion is wanted. So if GSAP
+  // never arrives, taking the class off again restores the entire page.
+
+  const root = document.documentElement;
+
+  if (!root.classList.contains('js-motion') || !window.gsap || !window.ScrollTrigger) {
+    root.classList.remove('js-motion');
+    return;
+  }
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const EASE = 'power3.out';
+
+  // Reveals are fromTo rather than from: the resting state has to be written
+  // as an inline opacity:1, or the stylesheet's holding rule wins again the
+  // moment the tween lets go.
+  function reveal(targets, { trigger, stagger = 0.09, y = 26, start = 'top 88%' } = {}) {
+    const els = gsap.utils.toArray(targets);
+    if (!els.length) return;
+    gsap.fromTo(els, { opacity: 0, y }, {
+      opacity: 1,
+      y: 0,
+      duration: 0.85,
+      ease: EASE,
+      stagger,
+      scrollTrigger: { trigger: trigger || els[0], start, once: true },
+    });
+  }
+
+  // Long grids reveal per card as it arrives rather than all at once, which
+  // is what a single trigger on the grid would do.
+  function revealEach(targets, { y = 26 } = {}) {
+    const els = gsap.utils.toArray(targets);
+    if (!els.length) return;
+    gsap.set(els, { y });
+    ScrollTrigger.batch(els, {
+      start: 'top 90%',
+      once: true,
+      onEnter: (group) => gsap.to(group, {
+        opacity: 1, y: 0, duration: 0.8, ease: EASE, stagger: 0.08,
+      }),
+    });
+  }
+
+  /* Hero — the one sequence that runs on load rather than on scroll. */
+  gsap.timeline({ defaults: { ease: EASE } })
+    .fromTo('.wordmark span', { opacity: 0, y: 46 },
+      { opacity: 1, y: 0, duration: 1.15, stagger: 0.14 })
+    .fromTo('.blurb', { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 0.9, stagger: 0.15 }, '-=0.8')
+    .fromTo('.stat', { opacity: 0, y: 24 },
+      { opacity: 1, y: 0, duration: 0.8, stagger: 0.12 }, '-=0.85')
+    .fromTo('.stat-rule', { scaleX: 0 },
+      { scaleX: 1, duration: 0.9, stagger: 0.12, transformOrigin: 'left center' }, '<');
+
+  const hero = document.querySelector('.hero');
+
+  // Type drifts and fades as the hero leaves. Transform and opacity on a few
+  // text nodes, so the photograph underneath is never repainted.
+  gsap.to('.masthead, .hero-stats', {
+    y: -54,
+    opacity: 0,
+    ease: 'none',
+    scrollTrigger: { trigger: hero, start: 'top top', end: 'bottom top', scrub: 0.5 },
+  });
+
+  /* Sections */
+  document.querySelectorAll('.section-head').forEach((head) => {
+    reveal([...head.children], { trigger: head });
+  });
+
+  revealEach('.treatment');
+  reveal('.discipline', { trigger: '.discipline-grid', stagger: 0.12 });
+  reveal('.banner', { y: 34 });
+  reveal('.wear', { y: 34 });
+  revealEach('.stage-notes li');
+  reveal('.quote-panel > *', { trigger: '.quote-panel', stagger: 0.12 });
+  reveal('.book-aside > *', { trigger: '.book-aside', stagger: 0.12 });
+  reveal('.book-form', { y: 34 });
+  reveal('.signup .wrap > *', { trigger: '.signup', stagger: 0.1 });
+  reveal('.footer-top > *', { trigger: '.footer-top', stagger: 0.1 });
+  reveal('.footer-base', { y: 16 });
+
+  // Both photographs settle out of a slight push-in across their own scroll.
+  // Pure scale, and both parents already clip.
+  [['.banner img', '.banner'], ['.quote-art img', '.quote-art']].forEach(([img, box]) => {
+    if (!document.querySelector(img)) return;
+    gsap.fromTo(img, { scale: 1.14 }, {
+      scale: 1,
+      ease: 'none',
+      scrollTrigger: { trigger: box, start: 'top bottom', end: 'bottom top', scrub: 0.6 },
+    });
+  });
+
+  /* The wear diagram draws itself: the unpolished band opens at the cuticle
+     week by week, then the rebook window marks itself out. */
+  const wearTrack = document.querySelector('.wear-track');
+  if (wearTrack) {
+    const run = wearTrack.getTotalLength();
+    gsap.timeline({ scrollTrigger: { trigger: '.wear', start: 'top 68%', once: true } })
+      .fromTo('#gel-1, #gel-2, #gel-3',
+        { attr: { height: 124 } },
+        {
+          attr: { height: (i) => [115, 106, 97][i] },
+          duration: 1.1,
+          ease: 'power2.out',
+          stagger: 0.18,
+        })
+      .fromTo(wearTrack,
+        { strokeDasharray: run, strokeDashoffset: run },
+        { strokeDashoffset: 0, duration: 0.7, ease: 'power2.inOut' }, '-=0.35')
+      .fromTo('.wear-mark', { opacity: 0, scale: 0.3 },
+        { opacity: 1, scale: 1, duration: 0.45, stagger: 0.09, transformOrigin: 'center' }, '-=0.45');
+  }
+
+  /* Hooks the behaviour above calls into. */
+
+  motion.quote = (paint) => {
+    const lines = [qText, qName, qService];
+    gsap.timeline()
+      .to(lines, { opacity: 0, y: -10, duration: 0.22, ease: 'power2.in' })
+      .add(paint)
+      .fromTo(lines, { opacity: 0, y: 14 },
+        { opacity: 1, y: 0, duration: 0.5, ease: EASE, stagger: 0.06 });
+  };
+
+  motion.slots = (container) => {
+    gsap.fromTo(container.querySelectorAll('.slot'), { opacity: 0, y: 8 },
+      { opacity: 1, y: 0, duration: 0.4, ease: EASE, stagger: 0.015 });
+  };
+
+  motion.filter = (cards) => {
+    gsap.fromTo(cards, { opacity: 0, y: 14 },
+      { opacity: 1, y: 0, duration: 0.45, ease: EASE, stagger: 0.04 });
+    // The grid just changed height, so everything below it measured wrong.
+    ScrollTrigger.refresh();
+  };
+
+  // Lazy images land after first paint and move every trigger beneath them.
+  addEventListener('load', () => ScrollTrigger.refresh());
 })();

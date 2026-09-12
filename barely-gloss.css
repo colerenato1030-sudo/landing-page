@@ -294,7 +294,11 @@ h2 em { font-style: italic; }
   overflow: hidden;
   isolation: isolate;
   --frame-size: auto 136%;
-  --frame-pos: 50% 20%;
+  /* Split so the scroll parallax has a single number to move. Every layer
+     reads --frame-pos, so shifting --frame-y drifts the photograph, the
+     cutout and the cutout's mask together and they stay registered. */
+  --frame-y: 20%;
+  --frame-pos: 50% var(--frame-y);
   --scrim: linear-gradient(to bottom,
     rgba(5,5,6,0.92) 0%, rgba(5,5,6,0.66) 26%,
     rgba(5,5,6,0.16) 48%, rgba(5,5,6,0.42) 100%);
@@ -1281,6 +1285,34 @@ blockquote {
 }
 
 /* ==========================================================================
+   Motion
+   These are the elements GSAP reveals on scroll, held back so the page does
+   not paint them once and then hide them. The list is the stylesheet half of
+   a pair — `REVEAL` in barely-gloss.js animates exactly these, and the two
+   have to be edited together. Nothing here applies unless the inline script
+   in the head sets .js-motion, so no-JS, failed-CDN and reduce-motion
+   visitors all get the page at full opacity.
+   ========================================================================== */
+
+.js-motion .wordmark span,
+.js-motion .blurb,
+.js-motion .stat,
+.js-motion .section-head > *,
+.js-motion .treatment,
+.js-motion .discipline,
+.js-motion .banner,
+.js-motion .wear,
+.js-motion .stage-notes li,
+.js-motion .quote-panel > *,
+.js-motion .book-aside > *,
+.js-motion .book-form,
+.js-motion .signup .wrap > *,
+.js-motion .footer-top > *,
+.js-motion .footer-base {
+  opacity: 0;
+}
+
+/* ==========================================================================
    Narrow
    ========================================================================== */
 
@@ -1297,7 +1329,7 @@ blockquote {
     /* cover leaves no vertical play at this aspect, so carry a little
        overscan to keep the same upward bias as the wide layout */
     --frame-size: auto 112%;
-    --frame-pos: 50% 38%;
+    --frame-y: 38%;
     /* the blurbs land on the hands here rather than beside them */
     --scrim: linear-gradient(to bottom,
       rgba(5,5,6,0.88) 0%, rgba(5,5,6,0.70) 30%,
