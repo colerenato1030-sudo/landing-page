@@ -114,3 +114,83 @@
     document.fonts.ready.then(fit);
   }
 })();
+
+/* ---------- GSAP animations ---------- */
+if (window.gsap) {
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* Hero entrance animation */
+  gsap.timeline()
+    .from(".hero__clouds", { opacity: 0, duration: 0.8 }, 0)
+    .from(".stage__type", { opacity: 0, y: 30, duration: 0.8 }, 0.2)
+    .from(".stage__subject", { opacity: 0, scale: 0.95, duration: 0.8 }, 0.2)
+    .from(".stage__caption", { opacity: 0, y: 20, duration: 0.8 }, 0.4);
+
+  /* Nav animation */
+  gsap.from(".nav", { opacity: 0, y: -20, duration: 0.6 });
+
+  /* Scroll animations for sections */
+  gsap.utils.toArray("section, footer").forEach((section) => {
+    gsap.from(section, {
+      scrollTrigger: {
+        trigger: section,
+        start: "top 80%",
+        once: true,
+      },
+      opacity: 0,
+      y: 30,
+      duration: 0.8,
+    });
+  });
+
+  /* Card stagger animations */
+  gsap.utils.toArray(".card").forEach((card, i) => {
+    gsap.from(card, {
+      scrollTrigger: {
+        trigger: card,
+        start: "top 85%",
+        once: true,
+      },
+      opacity: 0,
+      y: 20,
+      rotation: -2,
+      duration: 0.6,
+      delay: i * 0.1,
+    });
+  });
+
+  /* Coach list stagger */
+  gsap.utils.toArray(".coaches li").forEach((coach, i) => {
+    gsap.from(coach, {
+      scrollTrigger: {
+        trigger: coach,
+        start: "top 90%",
+        once: true,
+      },
+      opacity: 0,
+      x: -20,
+      duration: 0.5,
+      delay: i * 0.08,
+    });
+  });
+
+  /* Smooth scroll for nav links */
+  gsap.utils.toArray("a[href^='#']").forEach((link) => {
+    link.addEventListener("click", function (e) {
+      const href = this.getAttribute("href");
+      if (href !== "#" && document.querySelector(href)) {
+        e.preventDefault();
+        gsap.to(window, {
+          scrollTo: href,
+          duration: 0.8,
+          ease: "power2.inOut",
+        });
+      }
+    });
+  });
+
+  /* Add gsap.to for scroll-to functionality */
+  if (!gsap.hasPlugin("scrollTo")) {
+    gsap.registerPlugin(ScrollToPlugin);
+  }
+}
