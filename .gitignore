@@ -1,20 +1,10 @@
 
-# OmniRoute Plugin - Sensitive files
+# Environment and configuration
 .env
 .env.local
 .env.*.local
-.claude/plugins/omniroute/.env
-.claude/plugins/omniroute/.env.local
-
-# Environment and configuration
 *.env
 !.env.example
-!.claude/plugins/omniroute/.env.example
-
-# Logs and cache
-.claude/plugins/omniroute/logs/
-.claude/plugins/omniroute/cache/
-.claude/plugins/omniroute/*.log
 
 # IDE and system files
 .DS_Store
